@@ -1,5 +1,11 @@
 /* Thomas Bueler   Addition of 2 Fractions
-    I am using the linux terminal to run programs rather than an IDE. I think the terminal is simplier. Back to the program, it addes 2 fractions by muntipling the denominaters and then adding the numerator. It outpust the unreduced fraction. Then the fraction goes into the reduceFrac function. This function tests all inegers starting at 2 and going up to the current square root to the smallest numerator or denominator. It then cout's the reduced fraction.
+    I am using the linux terminal to run programs rather than an IDE. I think
+the terminal is simplier. Back to the program, it addes 2 fractions by
+muntipling the denominaters and then adding the numerator. It output the
+unreduced fraction. Then the fraction goes into the reduceFrac function.
+This function tests all integers starting at 2 and going up to the current
+square root to the smallest numerator or denominator. It then cout's the
+reduced fraction.
 */
 #include <iostream>
 #include <math.h>
