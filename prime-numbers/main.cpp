@@ -1,19 +1,23 @@
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
 int main()
 {
-    int a, factor = 2, bigFactor=1;
+    int a;
     cout << "Prime Numbers To:" << endl;
     cin >> a;
-    for
-    while (factor <= sml){
-        while (a % factor == 0){
-            a = a/factor;
-            sml = sml/factor;
-            bigFactor = bigFactor*factor;
+    for (int i = 1; i <= a; i++) {
+        int prime = 1, factor = 2;
+        while (factor < i){
+            if (i % factor == 0){
+                prime = 0;
+            }
+            factor++;
         }
-        factor++;
+        if (prime == 1){
+            cout << i << endl;
+        }
     }
 }
