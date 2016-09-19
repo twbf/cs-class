@@ -13,6 +13,7 @@ have already taken out a 7 and a 2.
 #include <math.h>h
 
 int findFactors(int,int);
+int divideFactors(int,int);
 
 using namespace std;
 
@@ -48,9 +49,7 @@ int findFactors(int a, int b){
 Enter 2 numbers:
 12
 18
-
 LCM is: 36
-
 Process returned 0 (0x0)   execution time : 6.312 s
 Press any key to continue.
 */
