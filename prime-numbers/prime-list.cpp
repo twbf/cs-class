@@ -1,3 +1,14 @@
+/* Thomas Bueler   List of Primes
+    This program lists all the prime numbers between 1 and whatever number the
+user choses. The program goes through the numbers and inputs each number in
+the findPrime function. The find prime function outputs a 1 if its prime and a
+0 if its composite. The findPrime function divides factors up to the square
+root of the number to sees if the number is prime. If it finds a factor it
+imedietly returns that number. The main function then has 2 counters one for
+primes and one for composites. It adds one every time it finds one of those
+numbers. The last step in the program is to output the 2 counters.
+*/
+
 #include <iostream>
 #include <math.h>
 
@@ -39,12 +50,10 @@ int findPrime (int number) {
 /*
 Prime Numbers To:
 10000
-
 The prime numbers are:
 2	3	5	7	11	13	17	19	23	29	31	37	41	43	47	53
 ...
 9907	9923	9929  9931	9941	9949	9967	9973
 Number of Primes: 1229
-
 Number of Composites: 8771
 */
