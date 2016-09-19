@@ -12,6 +12,8 @@ it isn't prime.
 #include <stdlib.h>
 #include <time.h>
 
+int findPrime (int);
+
 using namespace std;
 
 int main()
@@ -19,21 +21,22 @@ int main()
     srand(time(0));
     int a = rand()%1000;
     cout << "Is " << a << " prime?" << endl;
+    findPrime(a);
+    return 0;
+}
 
+int findPrime (int a){
     int prime = 1, factor = 2;
     while (factor <= sqrt(a)){
         if (a % factor == 0){
             prime = 0;
+            cout << "Not Prime" << endl;
+            return 0;
         }
         factor++;
     }
-
-    if (prime == 0){
-        cout << "Not prime" << endl;
-    } else {
-        cout << "Prime" << endl;
-    }
-
+    cout << "Prime" << endl;
+    return 0;
 }
 
 /*
