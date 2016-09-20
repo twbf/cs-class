@@ -10,10 +10,10 @@ have already taken out a 7 and a 2.
 */
 
 #include <iostream>
-#include <math.h>h
+#include <math.h>
 
 int findFactors(int,int);
-int divideFactors(int,int);
+int divideFactors(int, int, int, int, int);
 
 using namespace std;
 
@@ -34,17 +34,28 @@ int findFactors(int a, int b){
     else {
         sml=b;
     }
-    while (factor <= sml){
-        while (a % factor == 0 && b % factor == 0){
-            a = a/factor;
-            b = b/factor;
-            sml = sml/factor;
-            bigFactor = bigFactor*factor;
-        }
-        factor++;
-    }
+    bigFactor = divideFactors(a, b, sml, bigFactor, factor);
     return bigFactor;
 }
+
+int divideFactors(int a, int b, int sml, int bigFactor, int factor){
+    int bold = b;
+    while (a % factor == 0 && b % factor == 0){
+        a = a/factor;
+        b = b/factor;
+        sml = sml/factor;
+        bigFactor = bigFactor*factor;
+        cout << a <<  b  << sml << endl;
+    }
+    if (bold != b) {
+        divideFactors(b, a, sml, bigFactor, factor+1);
+    }
+    else{
+        return bigFactor;
+    }
+
+}
+
 /*
 Enter 2 numbers:
 12
