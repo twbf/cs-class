@@ -12,24 +12,18 @@ have already taken out a 7 and a 2.
 #include <iostream>
 #include <math.h>
 
-int findFactors(int,int);
 int divideFactors(int, int, int, int);
 
 using namespace std;
 
 int main()
 {
-    int a, b;
+    int a, b, factor = 2, bigFactor = 1;
     cout << "Enter 2 numbers:" << endl;
     cin >> a >> b;
-    cout << "\n" << "LCM is: " << (a*b)/findFactors(a,b) << endl;
-    return 0;
-}
-
-int findFactors(int a, int b){
-    int sml, factor = 2, bigFactor=1;
     bigFactor = divideFactors(a, b, bigFactor, factor);
-    return bigFactor;
+    cout << "\n" << "LCM is: " << (a*b)/bigFactor << endl;
+    return 0;
 }
 
 int divideFactors(int a, int b, int bigFactor, int factor){
@@ -52,6 +46,7 @@ int divideFactors(int a, int b, int bigFactor, int factor){
 Enter 2 numbers:
 12
 18
+
 LCM is: 36
 Process returned 0 (0x0)   execution time : 6.312 s
 Press any key to continue.
