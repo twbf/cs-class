@@ -13,7 +13,7 @@ have already taken out a 7 and a 2.
 #include <math.h>
 
 int findFactors(int,int);
-int divideFactors(int, int, int, int, int);
+int divideFactors(int, int, int, int);
 
 using namespace std;
 
@@ -28,27 +28,19 @@ int main()
 
 int findFactors(int a, int b){
     int sml, factor = 2, bigFactor=1;
-    if (a<b) {
-        sml=a;
-    }
-    else {
-        sml=b;
-    }
-    bigFactor = divideFactors(a, b, sml, bigFactor, factor);
+    bigFactor = divideFactors(a, b, bigFactor, factor);
     return bigFactor;
 }
 
-int divideFactors(int a, int b, int sml, int bigFactor, int factor){
-    int bold = b;
+int divideFactors(int a, int b, int bigFactor, int factor){
+    int bold = b, aold = a;
     while (a % factor == 0 && b % factor == 0){
         a = a/factor;
         b = b/factor;
-        sml = sml/factor;
         bigFactor = bigFactor*factor;
-        cout << a <<  b  << sml << endl;
     }
-    if (bold != b) {
-        divideFactors(b, a, sml, bigFactor, factor+1);
+    if (bold != b || aold != a) {
+        divideFactors(b, a, bigFactor, factor+1);
     }
     else{
         return bigFactor;
