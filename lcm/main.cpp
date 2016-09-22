@@ -18,11 +18,14 @@ using namespace std;
 
 int main()
 {
-    int a, b, factor = 2, bigFactor = 1;
+    int a, b, c, factor = 2, bigFactor = 1, lcm1, lcm2, lcm;
     cout << "Enter 2 numbers:" << endl;
-    cin >> a >> b;
-    bigFactor = divideFactors(a, b, bigFactor, factor);
-    cout << "\n" << "LCM is: " << (a*b)/bigFactor << endl;
+    cin >> a >> b >> c;
+    lcm1 = (a*b)/divideFactors(a, b, bigFactor, factor);
+    lcm2 = (c*b)/divideFactors(c, b, bigFactor, factor);
+    lcm = (lcm1*lcm2)/divideFactors(lcm1, lcm2, bigFactor, factor);
+    cout << lcm1 << lcm2 << endl;
+    cout << "\n" << "LCM is: " << lcm << endl;
     return 0;
 }
 
@@ -46,7 +49,6 @@ int divideFactors(int a, int b, int bigFactor, int factor){
 Enter 2 numbers:
 12
 18
-
 LCM is: 36
 Process returned 0 (0x0)   execution time : 6.312 s
 Press any key to continue.
