@@ -11,6 +11,7 @@ numbers. The last step in the program is to output the 2 counters.
 
 #include <iostream>
 #include <math.h>
+#include <fstream>
 
 int findPrime (int);
 
@@ -19,19 +20,25 @@ using namespace std;
 int main()
 {
     int a, primes = 0, composite = 1;
+    string filename;
     cout << "Prime Numbers To:" << endl;
     cin >> a;
+    cout << "Do you want it saved in a file (0-no filename-yes)" << endl;
+    cin >> filename;
     cout << "\nThe prime numbers are:" << endl;
+    ofstream myfile (filename);
     for (int i = 2; i <= a; i++) {
         int prime = findPrime(i);
         if (prime == 1){
             primes++;
+            myfile << i << "\t";
             cout << i << "\t";
         }
         else{
             composite++;
         }
     }
+    myfile.close();
     cout << "\nNumber of Primes: " << primes << endl;
     cout << "\nNumber of Composites: " << composite << endl;
 }
