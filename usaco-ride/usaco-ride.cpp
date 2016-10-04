@@ -7,6 +7,7 @@ PROG: test
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <string.h>
 
 using namespace std;
 
@@ -16,9 +17,18 @@ int main()
 {
     ofstream fout ("test.out");
     ifstream fin ("test.in");
-    char a, b;
-    cin >> a;
-    cout << getCharNum(a) << endl;
+    char comet[20];
+    char group[20];
+    cout << "Enter 2 6 letter all Upper Case strings" << endl;
+    cin >> comet >> group;
+    int sumComet = 1, sumGroup= 1;
+    for (int i=0; i<strlen(comet); i++){
+        sumComet = getCharNum(comet[i]*sumComet);
+    }
+    for (int i=0; i<strlen(group); i++){
+        sumGroup = getCharNum(group[i]*sumGroup);
+    }
+    cout << sumComet << '\n' << sumGroup << endl;
     return 0;
 }
 
