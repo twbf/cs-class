@@ -24,9 +24,7 @@ int main()
 
 int getCharNum(char letter){
     int number;
-    switch (letter){
-        case "A": number=1;
-            break;
-    }
+    number = (int) letter;
+    number -= 64;
     return number;
 }
