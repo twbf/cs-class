@@ -1,7 +1,7 @@
 /*
 ID: twbuele1
 LANG: C++
-PROG: ride
+PROG: test
 */
 
 #include <iostream>
@@ -10,12 +10,23 @@ PROG: ride
 
 using namespace std;
 
+int getCharNum(char);
+
 int main()
 {
     ofstream fout ("test.out");
     ifstream fin ("test.in");
-    int a, b;
-    fin >> a >> b;
-    fout << a+b << endl;
+    char a, b;
+    cin >> a;
+    cout << getCharNum(a) << endl;
     return 0;
+}
+
+int getCharNum(char letter){
+    int number;
+    switch (letter){
+        case "A": number=1;
+            break;
+    }
+    return number;
 }
