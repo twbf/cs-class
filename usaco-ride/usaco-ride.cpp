@@ -1,7 +1,7 @@
 /*
 ID: twbuele1
 LANG: C++
-PROG: test
+PROG: ride
 */
 
 #include <iostream>
@@ -15,20 +15,26 @@ int getCharNum(char);
 
 int main()
 {
-    ofstream fout ("test.out");
-    ifstream fin ("test.in");
+    ofstream fout ("ride.out");
+    ifstream fin ("ride.in");
     char comet[20];
     char group[20];
-    cout << "Enter 2 6 letter all Upper Case strings" << endl;
-    cin >> comet >> group;
+    fin >> comet >> group;
     int sumComet = 1, sumGroup= 1;
     for (int i=0; i<strlen(comet); i++){
-        sumComet = getCharNum(comet[i]*sumComet);
+        sumComet = getCharNum(comet[i])*sumComet;
     }
+    sumComet = sumComet%47;
     for (int i=0; i<strlen(group); i++){
-        sumGroup = getCharNum(group[i]*sumGroup);
+        sumGroup = getCharNum(group[i])*sumGroup;
     }
-    cout << sumComet << '\n' << sumGroup << endl;
+    sumGroup = sumGroup%47;
+    if(sumGroup==sumComet){
+        fout << "GO" << endl;
+    }
+    else{
+        fout << "STAY" << endl;
+    }
     return 0;
 }
 
