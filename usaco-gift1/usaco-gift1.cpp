@@ -30,21 +30,27 @@ int main()
     int money[10], moneyGived;
     char giver[25];
     while(i<=numberPeople-1){
+        //cout << numberPeople;
         int numGiftees = 0, j=0;
         fin >> giver;
         fin >> moneyGived;
         fin >> numGiftees;
         money[i]-=moneyGived-(moneyGived%numGiftees);
-        while(j<=numGiftees){
+        while(j<=numGiftees-1){
             char giftee[25];
             fin >> giftee;
-            int personId;
+            int personId = 0;
             for(int h=0; h<=20; h++){
                 if(giftee == people[h]){
                     personId = h;
                 }
             }
-            money[personId] = moneyGived%numGiftees;
+            //cout << numberPeople;
+            money[personId] = numGiftees%moneyGived;
+            //cout << personId << endl;
+            cout << money[personId] << endl;
+            cout << moneyGived << endl;
+            cout << numGiftees << endl;
             j++;
         }
     }
