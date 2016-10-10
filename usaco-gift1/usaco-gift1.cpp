@@ -49,13 +49,7 @@ int main()
                     personId = h;
                 }
             }
-            //cout << numberPeople;
             money[personId] += moneyGived/numGiftees;
-            //cout << people[i] << ' ' << money[i] << endl;
-            //cout << personId << endl;
-            //cout << money[personId] << endl;
-            //cout << moneyGived << endl;
-            //cout << numGiftees << endl;
             j++;
         }
         i++;
