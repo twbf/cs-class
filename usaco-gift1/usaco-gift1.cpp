@@ -19,12 +19,14 @@ int main()
     int numberPeople, i = 0;
     char people[25][25];
     fin >> numberPeople;
+    cout << numberPeople;
     while(i<=numberPeople-1){
         fin >> people[i];
         cout << people[i] << endl;
         i++;
     }
     i=0;
+    cout << numberPeople;
     int money[10], moneyGived;
     char giver[25];
     while(i<=numberPeople-1){
@@ -36,17 +38,15 @@ int main()
         while(j<=numGiftees){
             char giftee[25];
             fin >> giftee;
-            money[getId(giftee, people)] = moneyGived%numGiftees;
+            int personId;
+            for(int h=0; h<=20; h++){
+                if(giftee == people[h]){
+                    personId = h;
+                }
+            }
+            money[personId] = moneyGived%numGiftees;
             j++;
         }
     }
     return 0;
-}
-
-int getId(char[25] giftee, char[25][25] people){
-    for(int i=0; i<=20; i++){
-        if(giftee == people[i]){
-            return i;
-        }
-    }
 }
