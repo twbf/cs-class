@@ -42,19 +42,22 @@ int main()
         fin >> numGiftees;
 
         // get person ID matching
-        for(int h=0; h<=25; h++){
-            if(giver[1] == people[h][1]){
+        for(int h=0; h<25; h++){
+            if(!(strcmp(giver, people[h]))){
                 personId = h;
             }
         }
+        //char test1[20] = 'theiof';
+        //char test2[20] = 'theiof';
         money[personId]-=moneyGived-(moneyGived%numGiftees);
-        while(j<numGiftees-1){
+        while(j<numGiftees){
             fin >> giftee;
             for(int h=0; h<strlen(giftee); h++){
-                if(!strcmp(giftee, people[h]){
+                if(!(strcmp(giftee, people[h]))){
                     personId = h;
                 }
             }
+
             cout << personId << endl;
             money[personId] += moneyGived/numGiftees;
             cout << moneyGived/numGiftees << endl;
