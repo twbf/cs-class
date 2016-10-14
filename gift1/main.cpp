@@ -33,25 +33,27 @@ int main()
 
     // for each giver loop
     i=0;
-    while(i<numberPeople-1){
+    while(i<numberPeople){
         int numGiftees = 0, j=0;
         char giver[25];
         fin >> giver;
         fin >> moneyGived;
         fin >> numGiftees;
-        cout << numGiftees << endl;
 
         // get person ID matching
+        personId=0;
         for(int h=0; h<25; h++){
             if(!(strcmp(giver, people[h]))){
                 personId = h;
             }
         }
-        money[personId]-=moneyGived-(moneyGived%numGiftees);
+        if (numGiftees!=0) {
+            money[personId]-=moneyGived-(moneyGived%numGiftees);
+        }
         while(j<numGiftees){
             fin >> giftee;
-            fout << giftee;
-            for(int h=0; h<strlen(giftee); h++){
+            personId = 0;
+            for(int h=0; h<25; h++){
                 if(!(strcmp(giftee, people[h]))){
                     personId = h;
                 }
