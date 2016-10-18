@@ -1,8 +1,9 @@
 /*
 ID: twbuele1
 LANG: C++
-PROG: tst
+PROG: ride
 */
+
 #include <iostream>
 #include <fstream>
 #include <string>

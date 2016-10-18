@@ -1,3 +1,6 @@
+/* Thomas Bueler  Mad Libs
+*/
+
 #include <iostream>
 
 using namespace std;
