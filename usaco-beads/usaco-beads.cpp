@@ -1,7 +1,7 @@
 /*
 ID: twbuele1
 LANG: C++
-PROG: ride
+PROG: beads
 */
 
 #include <iostream>
@@ -13,9 +13,10 @@ using namespace std;
 int main()
 {
     ofstream fout ("test.out");
-    ifstream fin ("beads.in");
+    ifstream fin ("test.in");
     int a, b;
     fin >> a >> b;
     fout << a+b << endl;
     return 0;
 }
+
