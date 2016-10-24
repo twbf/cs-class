@@ -29,16 +29,40 @@ int main()
             start = 0;
         }
         for (int i = start; i < numBeads; i++){
-            if ((prevChar[0] == 'w' || prevChar[0] == 'b') && (beads[i] == 'w' || beads[i] == 'b')){
+            if (prevChar[0] == 'r' && beads[i] == 'b'){
+                cout << cmaxBeads << endl;
+                cmaxBeads = 0;
+            }
+            else {
                 cmaxBeads++;
+                cout << cmaxBeads << endl;
                 if (cmaxBeads > maxBeads){
                     maxBeads = cmaxBeads;
                 }
-                cout << cmaxBeads << endl;
             }
-            else {
+            prevChar[0] = beads[i];
+        }
+    }
+    cmaxBeads = 0;
+    prevChar[0] = beads[0];
+    for (int h = 0; h<10; h++) {
+        if (h == 0){
+            start = 1;
+        }
+        else {
+            start = 0;
+        }
+        for (int i = start; i < numBeads; i++){
+            if (prevChar[0] == 'b' && beads[i] == 'r'){
                 cout << cmaxBeads << endl;
                 cmaxBeads = 0;
+            }
+            else {
+                cmaxBeads++;
+                cout << cmaxBeads << endl;
+                if (cmaxBeads > maxBeads){
+                    maxBeads = cmaxBeads;
+                }
             }
             prevChar[0] = beads[i];
         }
