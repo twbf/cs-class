@@ -8,17 +8,28 @@ PROG: beads
 #include <fstream>
 #include <string>
 
+int loopingString (char, char);
+
 using namespace std;
 
 int main()
 {
-    //ofstream fout ("test.out");
+    ofstream fout ("beads.out");
+    if (loopingString('b', 'r') > loopingString('r', 'b')){
+        fout << loopingString('b', 'r') << endl;
+    }
+    else {
+        fout << loopingString('r', 'b') << endl;
+    }
+    return 0;
+}
+
+int loopingString (char a, char b){
     ifstream fin ("beads.in");
     int numBeads;
     char beads[370];
     fin >> numBeads >> beads;
-    int maxBeads = 0, start;
-    int cmaxBeads = 1;
+    int maxBeads = 0, start, cmaxBeads = 0, wCounter = 0;
     char prevChar[10] = {};
     prevChar[0] = beads[0];
     for (int j = 0; j<3; j++) {
@@ -29,8 +40,8 @@ int main()
             start = 0;
         }
         for (int i = start; i < numBeads; i++){
-            if (prevChar[0] == 'r' && beads[i] == 'b'){
-                cmaxBeads = 1;
+            if (prevChar[0] == a && beads[i] == b){
+                cmaxBeads = wCounter;
             }
             else {
                 cmaxBeads++;
@@ -38,37 +49,20 @@ int main()
                     maxBeads = cmaxBeads;
                 }
             }
-            if (beads[i] == 'b' || beads[i] == 'r'){
+            if (beads[i] == a || beads[i] == b){
                 prevChar[0] = beads[i];
-            }
-        }
-    }
-    cmaxBeads = 1;
-    prevChar[0] = beads[0];
-    for (int h = 0; h<3; h++) {
-        if (h == 0){
-            start = 1;
-        }
-        else {
-            start = 0;
-        }
-        for (int i = start; i < numBeads; i++){
-            if (prevChar[0] == 'b' && beads[i] == 'r'){
-                cmaxBeads = 1;
-                cout << cmaxBeads << beads[i] << ' ';
+                wCounter = 0;
             }
             else {
-                cmaxBeads++;
-                cout << cmaxBeads << beads[i] << ' ';
-                if (cmaxBeads > maxBeads){
-                    maxBeads = cmaxBeads;
-                }
-            }
-            if (beads[i] == 'b' || beads[i] == 'r'){
-                prevChar[0] = beads[i];
+                wCounter++;
             }
         }
     }
-    cout << maxBeads + 1 << endl;
-    return 0;
+    if (maxBeads>numBeads){
+        maxBeads = numBeads;
+    }
+    else{
+        maxBeads++;
+    }
+    return maxBeads;
 }
