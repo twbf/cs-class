@@ -18,7 +18,7 @@ int main()
     char beads[370];
     fin >> numBeads >> beads;
     int maxBeads = 0, start;
-    int cmaxBeads = 0;
+    int cmaxBeads = 1;
     char prevChar[10] = {};
     prevChar[0] = beads[0];
     for (int j = 0; j<3; j++) {
@@ -30,22 +30,22 @@ int main()
         }
         for (int i = start; i < numBeads; i++){
             if (prevChar[0] == 'r' && beads[i] == 'b'){
-                cout << cmaxBeads << endl;
-                cmaxBeads = 0;
+                cmaxBeads = 1;
             }
             else {
                 cmaxBeads++;
-                cout << cmaxBeads << endl;
                 if (cmaxBeads > maxBeads){
                     maxBeads = cmaxBeads;
                 }
             }
-            prevChar[0] = beads[i];
+            if (beads[i] == 'b' || beads[i] == 'r'){
+                prevChar[0] = beads[i];
+            }
         }
     }
-    cmaxBeads = 0;
+    cmaxBeads = 1;
     prevChar[0] = beads[0];
-    for (int h = 0; h<10; h++) {
+    for (int h = 0; h<3; h++) {
         if (h == 0){
             start = 1;
         }
@@ -54,17 +54,19 @@ int main()
         }
         for (int i = start; i < numBeads; i++){
             if (prevChar[0] == 'b' && beads[i] == 'r'){
-                cout << cmaxBeads << endl;
-                cmaxBeads = 0;
+                cmaxBeads = 1;
+                cout << cmaxBeads << beads[i] << ' ';
             }
             else {
                 cmaxBeads++;
-                cout << cmaxBeads << endl;
+                cout << cmaxBeads << beads[i] << ' ';
                 if (cmaxBeads > maxBeads){
                     maxBeads = cmaxBeads;
                 }
             }
-            prevChar[0] = beads[i];
+            if (beads[i] == 'b' || beads[i] == 'r'){
+                prevChar[0] = beads[i];
+            }
         }
     }
     cout << maxBeads + 1 << endl;
