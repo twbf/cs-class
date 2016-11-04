@@ -34,6 +34,18 @@ int main()
             }
         }
     }
+    int currentMilking = 0, currentNot = 0, maxMilking = 0, maxNot = 0, flag = true;
+    for (int i = 0; i < 1000000; i++){
+        flag = true;
+        for (int j = 1; j < numFarmers+1 && flag != false; j++){
+            if ((time[0][j] >= i) && (time[0][j] <= i)){
+                currentMilking++;
+                cout << currentMilking;
+                flag = false;
+            }
+        }
+    }
+
     for (int i = 1; i < numFarmers +1; i++){
         cout << time[0][i] << ' ';
         cout << time[1][i] << endl;
