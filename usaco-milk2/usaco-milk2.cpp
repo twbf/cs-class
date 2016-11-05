@@ -1,7 +1,7 @@
 /*
 ID: twbuele1
 LANG: C++
-PROG: ride
+PROG: milk2
 */
 
 #include <iostream>
@@ -12,7 +12,7 @@ using namespace std;
 
 int main()
 {
-    //ofstream fout ("test.out");
+    ofstream fout ("milk2.out");
     ifstream fin ("milk2.in");
     int time[2][5000];
     int numFarmers;
@@ -35,21 +35,29 @@ int main()
         }
     }
     int currentMilking = 0, currentNot = 0, maxMilking = 0, maxNot = 0, flag = true;
-    for (int i = 0; i < 1000000; i++){
+    cout << time[0][numFarmers];
+    for (int i = time[0][1]; i < time[1][numFarmers]; i++){
         flag = true;
-        for (int j = 1; j < numFarmers+1 && flag != false; j++){
-            if ((time[0][j] >= i) && (time[0][j] <= i)){
+        for (int j = 1; j < numFarmers +1 && flag != false; j++){
+            if ((time[0][j] <= i) && (time[1][j] > i)){
+                currentNot = 0;
                 currentMilking++;
-                cout << currentMilking;
+                if (currentMilking > maxMilking){
+                    maxMilking = currentMilking;
+                }
                 flag = false;
+            }
+        }
+        if (flag == true){
+            currentMilking = 0;
+            currentNot++;
+            if (currentNot > maxNot){
+                maxNot = currentNot;
             }
         }
     }
 
-    for (int i = 1; i < numFarmers +1; i++){
-        cout << time[0][i] << ' ';
-        cout << time[1][i] << endl;
-    }
+    fout << maxMilking  << " " << maxNot << endl;
+
     return 0;
 }
-
