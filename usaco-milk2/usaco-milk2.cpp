@@ -35,10 +35,17 @@ int main()
         }
     }
     int currentMilking = 0, currentNot = 0, maxMilking = 0, maxNot = 0, flag = true;
-    cout << time[0][numFarmers];
-    for (int i = time[0][1]; i < time[1][numFarmers]; i++){
+
+    int max = 0;
+    for (int i=0; i<=numFarmers; i++){
+        if (time[1][i] > max){
+            max = time[1][i];
+        }
+    }
+    cout << max << "tt" << time[1][1] << time[0][1];
+    for (int i = time[0][1]; i < max; i++){
         flag = true;
-        for (int j = 1; j < numFarmers +1 && flag != false; j++){
+        for (int j = 0; j < numFarmers +1 && flag != false; j++){
             if ((time[0][j] <= i) && (time[1][j] > i)){
                 currentNot = 0;
                 currentMilking++;
