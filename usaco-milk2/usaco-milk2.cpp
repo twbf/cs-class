@@ -42,13 +42,15 @@ int main()
             max = time[1][i];
         }
     }
-    cout << max << "tt" << time[1][1] << time[0][1];
+    int timeInBetween;
     for (int i = time[0][1]; i < max; i++){
         flag = true;
         for (int j = 0; j < numFarmers +1 && flag != false; j++){
             if ((time[0][j] <= i) && (time[1][j] > i)){
                 currentNot = 0;
-                currentMilking++;
+                timeInBetween = (time[1][j]-i) -1;
+                currentMilking += timeInBetween +1;
+                i+= timeInBetween;
                 if (currentMilking > maxMilking){
                     maxMilking = currentMilking;
                 }
