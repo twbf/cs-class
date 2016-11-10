@@ -24,7 +24,17 @@ int main()
     for (int i = 0; i<arraySize; i++){
         fin >> endPattern[i];
     }
-    if (startPattern[0][0] == endPattern[0][0]){
+
+    //checking
+    int check = true;
+    for (int i=0; i<arraySize; i++){
+        for (int j=0; i<arraySize; i++){
+            if (!(startPattern[i][j] == endPattern[i][j])){
+                check = false;
+            }
+        }
+    }
+    if (check == true){
         cout << 6 << endl;
         return 0;
     }
