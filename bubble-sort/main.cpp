@@ -11,7 +11,7 @@ public:
     void sortData();
     void printData();
 private:
-    int numArray[20];
+    int numArray[50000];
 };
 
 void bubbleSort::swapNum(int a, int b){
@@ -22,9 +22,12 @@ void bubbleSort::swapNum(int a, int b){
 
 void bubbleSort::sortData(){
     bool isdone = false;
-    for (int i = 0; i< 20; i++){
-        for (int j = 0; (j< 19) && !isdone; j++){
-            isdone = true;
+    for (int i = 50000; i>0 && !isdone; i--){
+        isdone = true;
+        if (i%1000 == 0){
+            cout << i << endl;
+        }
+        for (int j = 50000-i; (j<49999); j++){
             if (numArray[j] > numArray[j+1]){
                 isdone = false;
                 swapNum(j, j+1);
@@ -35,13 +38,13 @@ void bubbleSort::sortData(){
 
 void bubbleSort::getData(){
     srand(time(0));
-    for (int i = 0; i< 20; i++){
-        numArray[i] = rand()%100;
+    for (int i = 0; i< 50000; i++){
+        numArray[i] = rand()%10000;
     }
 }
 
 void bubbleSort::printData(){
-    for (int i = 0; i < 20; i++){
+    for (int i = 0; i < 50000; i++){
         cout << ", " <<  numArray[i];
     }
     cout << " " << endl;
@@ -50,7 +53,7 @@ void bubbleSort::printData(){
 int main(){
     bubbleSort bs;
     bs.getData();
-    bs.printData();
+    //bs.printData();
     bs.sortData();
     bs.printData();
     return 0;
