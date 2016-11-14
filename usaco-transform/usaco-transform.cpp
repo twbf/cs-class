@@ -8,6 +8,8 @@ PROG: transform
 #include <fstream>
 #include <string>
 
+char rotateArray(char[3][3],int);
+
 using namespace std;
 
 int main()
@@ -18,6 +20,7 @@ int main()
     fin >> arraySize;
     char startPattern[arraySize][arraySize];
     char endPattern[arraySize][arraySize];
+    char changedPattern[arraySize][arraySize];
     for (int i = 0; i<arraySize; i++){
         fin >> startPattern[i];
     }
@@ -25,11 +28,13 @@ int main()
         fin >> endPattern[i];
     }
 
+    changedPattern[arraySize][arraySize] = rotateArray(startPattern[arraySize][arraySize], arraySize);
+
     //checking
     int check = true;
     for (int i=0; i<arraySize; i++){
         for (int j=0; i<arraySize; i++){
-            if (!(startPattern[i][j] == endPattern[i][j])){
+            if (!(changedPattern[i][j] == changedPattern[i][j])){
                 check = false;
             }
         }
@@ -39,4 +44,14 @@ int main()
         return 0;
     }
     return 0;
+}
+
+char rotateArray(char pattern[3][3], int arraySize){
+    char rotatedPattern[arraySize][arraySize];
+    for (int i = 0; i < arraySize; ++i) {
+        for (int j = 0; j < arraySize; ++j) {
+            rotatedPattern[i][j] = pattern[arraySize-j-1][i];
+        }
+    }
+    return rotatedPattern[arraySize][arraySize];
 }
