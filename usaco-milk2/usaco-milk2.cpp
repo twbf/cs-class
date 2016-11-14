@@ -22,7 +22,7 @@ int main()
         fin >> time[1][i];
     }
     for (int i = 0; i < numFarmers; i++){
-        for (int j = 0; j < numFarmers; j++){
+        for (int j = numFarmers - i-1; j < numFarmers; j++){
             int tmp[2] = {};
             if(time[0][j] > time [0][j+1]){
                 tmp[0] = time[0][j];
@@ -34,7 +34,8 @@ int main()
             }
         }
     }
-    int currentMilking = 0, currentNot = 0, maxMilking = 0, maxNot = 0, flag = true;
+    int currentMilking = 0, currentNot = 0, maxMilking = 0, maxNot = 0;
+    bool flag = true;
 
     int max = 0;
     for (int i=0; i<=numFarmers; i++){
@@ -48,9 +49,9 @@ int main()
         for (int j = 0; j < numFarmers +1 && flag != false; j++){
             if ((time[0][j] <= i) && (time[1][j] > i)){
                 currentNot = 0;
-                timeInBetween = (time[1][j]-i) -1;
-                currentMilking += timeInBetween +1;
-                i+= timeInBetween;
+                timeInBetween = (time[1][j]-i);
+                currentMilking += timeInBetween;
+                i+= timeInBetween -1;
                 if (currentMilking > maxMilking){
                     maxMilking = currentMilking;
                 }

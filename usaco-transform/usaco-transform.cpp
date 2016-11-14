@@ -12,6 +12,10 @@ char rotateArray(char[3][3],int);
 
 using namespace std;
 
+class transformPattern {
+
+};
+
 int main()
 {
     ofstream fout ("transform.out");

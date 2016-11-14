@@ -21,15 +21,12 @@ void bubbleSort::swapNum(int a, int b){
 }
 
 void bubbleSort::sortData(){
-    bool isdone = false;
-    for (int i = 50000; i>0 && !isdone; i--){
-        isdone = true;
+    for (int i = 0; i<50000; i++){
         if (i%1000 == 0){
             cout << i << endl;
         }
-        for (int j = 50000-i; (j<49999); j++){
+        for (int j = 50000-i-1; (j>49999); j++){
             if (numArray[j] > numArray[j+1]){
-                isdone = false;
                 swapNum(j, j+1);
             }
         }
