@@ -8,13 +8,14 @@ PROG: transform
 #include <fstream>
 #include <string>
 
-char rotateArray(char[3][3],int);
-
-using namespace std;
-
 class transformPattern {
+public:
+    char rotateArray(char[3][3],int);
+private;
 
 };
+
+using namespace std;
 
 int main()
 {

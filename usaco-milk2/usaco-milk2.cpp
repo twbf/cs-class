@@ -8,13 +8,15 @@ PROG: milk2
 #include <fstream>
 #include <string>
 
+void swapNum(int,int,int,int[2][5002]);
+
 using namespace std;
 
 int main()
 {
     ofstream fout ("milk2.out");
     ifstream fin ("milk2.in");
-    int time[2][5000];
+    int time[2][5002];
     int numFarmers;
     fin >> numFarmers;
     for (int i = 0; i < numFarmers; i++){
@@ -22,15 +24,10 @@ int main()
         fin >> time[1][i];
     }
     for (int i = 0; i < numFarmers; i++){
-        for (int j = numFarmers - i-1; j < numFarmers; j++){
-            int tmp[2] = {};
-            if(time[0][j] > time [0][j+1]){
-                tmp[0] = time[0][j];
-                tmp[1] = time[1][j];
-                time[0][j] = time[0][j+1];
-                time[1][j] = time[1][j+1];
-                time[0][j+1] = tmp[0];
-                time[1][j+1] = tmp[1];
+        for (int j = numFarmers-i-1; j < numFarmers; j++){
+            if(time[0][j] > time[0][j+1]){
+                swapNum(j, j+1, 0, time);
+                swapNum(j, j+1, 1, time);
             }
         }
     }
@@ -70,4 +67,9 @@ int main()
     fout << maxMilking  << " " << maxNot << endl;
 
     return 0;
+}
+void swapNum(int a, int b, int collum, int time[2][5002]){
+    int tmp = time[collum][a];
+    time[collum][a] = time[collum][b];
+    time[collum][b] = tmp;
 }
