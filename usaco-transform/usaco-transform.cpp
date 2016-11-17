@@ -8,14 +8,22 @@ PROG: transform
 #include <fstream>
 #include <string>
 
+using namespace std;
+
 class transformPattern {
 public:
-    char rotateArray(char[3][3],int);
-private;
-
+    char rotateArray(char*,int);
 };
 
-using namespace std;
+char transformPattern::rotateArray(char *pattern, int arraySize){
+    char* rotatedPattern = new char[arraySize*arraySize];
+    for (int i = 0; i < arraySize; ++i) {
+        for (int j = 0; j < arraySize; ++j) {
+            rotatedPattern[i*arraySize+j] = pattern[(arraySize-j-1)*arraySize+i];
+        }
+    }
+    return rotatedPattern;
+}
 
 int main()
 {
@@ -23,23 +31,26 @@ int main()
     ifstream fin ("transform.in");
     int arraySize;
     fin >> arraySize;
-    char startPattern[arraySize][arraySize];
-    char endPattern[arraySize][arraySize];
-    char changedPattern[arraySize][arraySize];
+
+    char startPattern[arraySize*arraySize];
+    char endPattern[arraySize*arraySize];
+    char changePattern[arraySize*arraySize];
+
+    int SIZE = &arraySize;
     for (int i = 0; i<arraySize; i++){
         fin >> startPattern[i];
     }
     for (int i = 0; i<arraySize; i++){
         fin >> endPattern[i];
     }
-
-    changedPattern[arraySize][arraySize] = rotateArray(startPattern[arraySize][arraySize], arraySize);
+    transformPattern tp;
+    changePattern* = tp.rotateArray(*startPattern, arraySize);
 
     //checking
     int check = true;
     for (int i=0; i<arraySize; i++){
         for (int j=0; i<arraySize; i++){
-            if (!(changedPattern[i][j] == changedPattern[i][j])){
+            if (!(changePattern[i][j] == changePattern[i][j])){
                 check = false;
             }
         }
@@ -49,14 +60,4 @@ int main()
         return 0;
     }
     return 0;
-}
-
-char rotateArray(char pattern[3][3], int arraySize){
-    char rotatedPattern[arraySize][arraySize];
-    for (int i = 0; i < arraySize; ++i) {
-        for (int j = 0; j < arraySize; ++j) {
-            rotatedPattern[i][j] = pattern[arraySize-j-1][i];
-        }
-    }
-    return rotatedPattern[arraySize][arraySize];
 }
