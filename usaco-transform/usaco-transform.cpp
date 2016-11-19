@@ -30,9 +30,11 @@ char transformPattern::rotateArray(char **pattern, int arraySize){
 }
 
 int transformPattern::check(char** array1, char** array2, int size){
+    cout << size;
     for (int i=0; i<size; i++){
         for (int j=0; i<size; i++){
-            if (!(array1[i][j] == array2[i][j])){
+            cout << array1[i][j] << array2[i][j]<< endl;
+            if (array1[i][j] != array2[i][j]){
                 return 1;
             }
         }
@@ -50,6 +52,8 @@ void transformPattern::changeArray(char** start, char** end, int arraySize, int 
     case 1:
         **changePattern = tp.rotateArray(start, arraySize);
         check = tp.check(changePattern, end, arraySize);
+        //cout << check << endl;
+        //cout << changePattern[0][1] << endl;
         if (check == 0){
             cout << 1 << endl;
         }
@@ -66,13 +70,13 @@ void transformPattern::changeArray(char** start, char** end, int arraySize, int 
         **changePattern = tp.rotateArray(start, arraySize);
         check = tp.check(changePattern, end, arraySize);
         if (check == 0){
-            cout << 2 << endl;
+            cout << 3 << endl;
         }
     case 6:
         changePattern = start;
         check = tp.check(changePattern, end, arraySize);
         if (check == 0){
-            cout << 2 << endl;
+            cout << 6 << endl;
         }
     }
 }
@@ -106,9 +110,6 @@ int main()
     for (int i = 0; i<8; i++){
         tp.changeArray(startPattern, endPattern, arraySize, i);
     }
-    **changePattern = tp.rotateArray(startPattern, arraySize);
-
-    //checking
 
     return 0;
 }
