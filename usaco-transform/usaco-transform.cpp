@@ -12,28 +12,26 @@ using namespace std;
 
 class transformPattern {
 public:
-    char rotateArray(char**,int);
+    char** rotateArray(char**,int);
     int check(char**,char**, int);
     void changeArray(char**, char**, int, int);
 };
 
-char transformPattern::rotateArray(char **pattern, int arraySize){
+char** transformPattern::rotateArray(char **pattern, int arraySize){
     char **rotatedPattern = new char*[arraySize];
-    for(int i = 0; i < arraySize; ++i)
+    for(int i = 0; i < arraySize; i++)
         rotatedPattern[i] = new char[arraySize];
-    for (int i = 0; i < arraySize; ++i) {
-        for (int j = 0; j < arraySize; ++j) {
+    for (int i = 0; i < arraySize; i++) {
+        for (int j = 0; j < arraySize; j++) {
             rotatedPattern[i][j] = pattern[arraySize-j-1][i];
         }
     }
-    return **rotatedPattern;
+    return rotatedPattern;
 }
 
 int transformPattern::check(char** array1, char** array2, int size){
-    cout << size;
     for (int i=0; i<size; i++){
-        for (int j=0; i<size; i++){
-            cout << array1[i][j] << array2[i][j]<< endl;
+        for (int j=0; j<size; j++){
             if (array1[i][j] != array2[i][j]){
                 return 1;
             }
@@ -44,60 +42,62 @@ int transformPattern::check(char** array1, char** array2, int size){
 
 void transformPattern::changeArray(char** start, char** end, int arraySize, int transformNum){
     char **changePattern = new char*[arraySize];
-    for(int i = 0; i < arraySize; ++i)
+    for(int i = 0; i < arraySize; i++)
         changePattern[i] = new char[arraySize];
     transformPattern tp;
+    ofstream fout ("transform.out");
     int check;
     switch (transformNum){
     case 1:
-        **changePattern = tp.rotateArray(start, arraySize);
+        changePattern = tp.rotateArray(start, arraySize);
         check = tp.check(changePattern, end, arraySize);
-        //cout << check << endl;
-        //cout << changePattern[0][1] << endl;
         if (check == 0){
             cout << 1 << endl;
+            //break;
         }
     case 2:
-        **changePattern = tp.rotateArray(start, arraySize);
-        **changePattern = tp.rotateArray(start, arraySize);
+        changePattern = tp.rotateArray(start, arraySize);
+        changePattern = tp.rotateArray(start, arraySize);
         check = tp.check(changePattern, end, arraySize);
         if (check == 0){
-            cout << 2 << endl;
+            fout << 2 << endl;
+            //break;
         }
     case 3:
-        **changePattern = tp.rotateArray(start, arraySize);
-        **changePattern = tp.rotateArray(start, arraySize);
-        **changePattern = tp.rotateArray(start, arraySize);
+        changePattern = tp.rotateArray(start, arraySize);
+        changePattern = tp.rotateArray(start, arraySize);
+        changePattern = tp.rotateArray(start, arraySize);
         check = tp.check(changePattern, end, arraySize);
         if (check == 0){
-            cout << 3 << endl;
+            fout << 3 << endl;
+            //break;
         }
     case 6:
         changePattern = start;
         check = tp.check(changePattern, end, arraySize);
         if (check == 0){
-            cout << 6 << endl;
+            fout << 6 << endl;
+            //break;
         }
     }
 }
 
 int main()
 {
-    ofstream fout ("transform.out");
     ifstream fin ("transform.in");
     int arraySize;
     fin >> arraySize;
 
     char **startPattern = new char*[arraySize];
-    for(int i = 0; i < arraySize; ++i)
+    for(int i = 0; i < arraySize; i++)
         startPattern[i] = new char[arraySize];
 
     char **endPattern = new char*[arraySize];
-    for(int i = 0; i < arraySize; ++i)
+    for(int i = 0; i < arraySize; i++)
         endPattern[i] = new char[arraySize];
 
     char **changePattern = new char*[arraySize];
-    for(int i = 0; i < arraySize; ++i)
+    for(int i = 0; i < arraySize; i++)
         changePattern[i] = new char[arraySize];
 
     for (int i = 0; i<arraySize; i++){
@@ -107,7 +107,7 @@ int main()
         fin >> endPattern[i];
     }
     transformPattern tp;
-    for (int i = 0; i<8; i++){
+    for (int i = 1; i<8; i++){
         tp.changeArray(startPattern, endPattern, arraySize, i);
     }
 
