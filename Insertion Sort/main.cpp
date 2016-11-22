@@ -11,7 +11,7 @@ of the array. This was very important to make the usability of the program.
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#define SIZE 40
+#define SIZE 20
 using namespace std;
 
 class insertionSort{
@@ -32,16 +32,17 @@ void insertionSort::getData(){
 
 void insertionSort::printData(){
     for (int i = 0; i < SIZE; i++){
-        cout << ", " <<  numArray[i];
+        cout <<  numArray[i] << "\t";
     }
-    cout << endl;
+    cout << "\n\n";
 }
 
 void insertionSort::bubbleDown(){
     int tmp;
     int location;
-    for (int i=0; i<SIZE; i++){
+    for (int i=0; i<SIZE-1; i++){
         tmp = numArray[i+1];
+        location = i+1;
         for(int j = i+1; j>0; j--){
             if (numArray[j-1]<tmp){
                 numArray[j]=numArray[j-1];
@@ -61,9 +62,10 @@ main (){
 }
 
 /*
-, 7, 51, 72, 16, 65, 49, 38, 25, 70, 10, 2, 13, 79, 24, 55, 82, 66, 14, 74, 28, 70, 94, 46, 51, 47, 96, 34, 25, 90, 75, 22, 81, 91, 41, 90, 61, 12, 34, 38, 50
-, 96, 94, 91, 90, 90, 82, 81, 79, 75, 74, 72, 70, 70, 66, 65, 61, 61, 55, 51, 51, 50, 49, 47, 46, 41, 38, 38, 34, 34, 28, 25, 25, 24, 22, 16, 14, 13, 12, 2, 7
+thomas@thomas-gazelle:~/cs-class/Insertion Sort$ ./main
+75	77	98	35	88	11	52	0	6	50	89	42	40	80	68	4	97	23	92	81
 
-Process returned 0 (0x0)   execution time : 0.302 s
-Press any key to continue.
+98	97	92	89	88	81	80	77	68	52	50	42	40	35	23	11	6	4	0   0
+
+thomas@thomas-gazelle:~/cs-class/Insertion Sort$
 */
