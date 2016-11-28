@@ -11,7 +11,7 @@ of the array. This was very important to make the usability of the program.
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#define SIZE 20
+#define SIZE 500000
 using namespace std;
 
 class insertionSort{
