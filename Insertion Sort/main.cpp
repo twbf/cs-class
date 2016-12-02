@@ -3,7 +3,7 @@
 It uses time with rand to create random number. Print data is pretty self
 explanatory. Bubble down is the work horse. It starts at the beggening of the
 array and moves along taking out a peice and then it puts it in the right place.
-It is like a machine and it moves along the array spitting out the sortyed array.
+It is like a machine and it moves along the array spitting out the sorted array.
 I for the first time used a global variable to make it eaisear to change the size
 of the array. This was very important to make the usability of the program.
 */
@@ -11,7 +11,7 @@ of the array. This was very important to make the usability of the program.
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#define SIZE 500000
+#define SIZE 20
 using namespace std;
 
 class insertionSort{
@@ -42,8 +42,8 @@ void insertionSort::bubbleDown(){
     int location;
     for (int i=0; i<SIZE-1; i++){
         tmp = numArray[i+1];
-        location = i+1;
-        for(int j = i+1; j>0; j--){
+        location = i+2;
+        for(int j = location; j>0; j--){
             if (numArray[j-1]<tmp){
                 numArray[j]=numArray[j-1];
                 location = j;
@@ -62,10 +62,14 @@ main (){
 }
 
 /*
-thomas@thomas-gazelle:~/cs-class/Insertion Sort$ ./main
-75	77	98	35	88	11	52	0	6	50	89	42	40	80	68	4	97	23	92	81
+11      29      14      54      12      74      98      1       23      51      76      17      51      13      59
+66      12      75      57      70
 
-98	97	92	89	88	81	80	77	68	52	50	42	40	35	23	11	6	4	0   0
+98      76      75      74      70      66      59      57      54      51      51      29      23      17      14
+13      12      12      11      1
 
-thomas@thomas-gazelle:~/cs-class/Insertion Sort$
+
+Process returned 0 (0x0)   execution time : 0.031 s
+Press any key to continue.
+
 */
