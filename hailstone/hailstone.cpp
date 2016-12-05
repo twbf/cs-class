@@ -5,7 +5,7 @@
 2. The starting number 73 has a length of 106. The starting number 72 and
 74 has a length of 23.
 
-3.the legth of the sequence starting at 2 n is 1 more, because the sequence
+3.the length of the sequence starting at 2 n is 1 more, because the sequence
 will divide by 2 and go through n.
 */
 
@@ -33,6 +33,6 @@ main (){
             //cout << startingNum << endl;
         }
         //cout << "STUCK!!" << endl;
-        cout << "How many timesbefore it got stuck: " << count+1 << endl;
+        cout << "How many times before it got stuck: " << count+1 << endl;
     }
 }
