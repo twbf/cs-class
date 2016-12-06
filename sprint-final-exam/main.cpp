@@ -1,3 +1,13 @@
+/*  Project: Sprint Final Exam
+    Name: Thomas Bueler
+    Date: 12/6/16
+
+    Description: This program provides a user interface to decide which sprint
+    phone plan is right for you. Each plan is a function that takes how many
+    minutes you think you will need and returns the cost. You can compare plans
+    or choose a specific plan to identify the cost. 
+*/
+
 #include <iostream>
 
 using namespace std;
@@ -16,7 +26,7 @@ main () {
     callingPlans cp;
     int plan;
     int minutes;
-    cout << "Welcome to Thomas's sprint calling plan guide. Are you interested in: \n (1) a pecific plan \n (2) a comparison of all plans \n\nSelect an option: ";
+    cout << "Welcome to Thomas's sprint calling plan guide. Are you interested in: \n (1) a specific plan \n (2) a comparison of all plans \n\nSelect an option: ";
     cin >> plan;
     if (plan == 1){
         int callingPlan;
@@ -44,7 +54,7 @@ main () {
     else if (plan == 2){
         cout << "How many minutes do you forsee using each month? ";
         cin >> minutes;
-        cout << "\nYour bill would be before tax and such:\n";
+        cout << "\nYour bill would be (before tax and such):\n";
         for (int i = 1; i < 5; i++){
             cout << "\n$" << cp.switchPlans(minutes, i) << " using";
             cp.planName(i);
