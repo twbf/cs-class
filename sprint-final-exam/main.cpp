@@ -5,7 +5,7 @@
     Description: This program provides a user interface to decide which sprint
     phone plan is right for you. Each plan is a function that takes how many
     minutes you think you will need and returns the cost. You can compare plans
-    or choose a specific plan to identify the cost. 
+    or choose a specific plan to identify the cost.
 */
 
 #include <iostream>
@@ -67,6 +67,7 @@ main () {
 }
 
 void callingPlans::planName(int plan){
+    /* This function out puts the plan name when you give it an */
     switch (plan){
     case 1:
         cout << " Sprint 7 cents Anytime";
