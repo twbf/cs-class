@@ -85,6 +85,8 @@ void callingPlans::planName(int plan){
 }
 
 double callingPlans::switchPlans(int x, int plan){
+    /*calling a calling plan with number and minute then returning it to the
+    function. This is used to call the calling plans easier.*/
     callingPlans cp;
     switch (plan){
     case 1:
@@ -99,11 +101,13 @@ double callingPlans::switchPlans(int x, int plan){
 }
 
 double callingPlans::s7(int x){
+    /* PLAN = 0.O7X+5.95 */
     double money = 5.95 + 0.07*x;
     return money;
 }
 
 double callingPlans::s500(int x){
+    /* PLAN = 500 free minutes for 25$ then 10 cents per secounds */
     double money = 0;
     if (x>500){
         money = (x-500)*.10;
@@ -113,6 +117,7 @@ double callingPlans::s500(int x){
 }
 
 double callingPlans::s1000(int x){
+    /* PLAN = 1000 free minutes for 40$ then 10 cents per secounds */
     double money = 0;
     if (x>1000){
         money = (x-1000)*.10;
@@ -122,6 +127,7 @@ double callingPlans::s1000(int x){
 }
 
 double callingPlans::s5night(int x){
+    /* PLAN = 0.O5X+8.95 */
     double money = 8.95 + 0.05*x;
     return money;
 }
