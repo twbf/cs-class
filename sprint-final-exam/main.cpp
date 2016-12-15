@@ -131,3 +131,22 @@ double callingPlans::s5night(int x){
     double money = 8.95 + 0.05*x;
     return money;
 }
+
+/*
+Welcome to Thomas's sprint calling plan guide. Are you interested in:
+ (1) a specific plan
+ (2) a comparison of all plans
+
+Select an option: 2
+How many minutes do you forsee using each month? 789
+
+Your bill would be (before tax and such):
+
+$61.18 using Sprint 7 cents Anytime
+$53.9 using Sprint 500 Anytime
+$40 using Sprint 1000 Anytime
+$48.4 using Sprint 5 cents nights
+
+Process returned 0 (0x0)   execution time : 21.333 s
+Press any key to continue.
+*/

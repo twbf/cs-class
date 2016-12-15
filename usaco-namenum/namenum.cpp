@@ -7,6 +7,8 @@ PROG: ride
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
@@ -19,6 +21,11 @@ int main()
     char dict[5000][5];
     for (int i=0; i<5000; i++){
         finDict >> dict[i];
+    }
+    char num[20];
+    fin >> num;
+    for (int i=0; i<strlen(num); i++){
+
     }
     return 0;
 }
