@@ -17,7 +17,7 @@ public:
     void createCombos(int, int, char[20]);
     char combos[531500][20];
     int max;
-    char keyboard[8][3][2] = {{"A","B","C"},{"D","E","F"},{"G","H","I"},{"J","K","L"},{"M","N","O"}, {"P","R","S"}, {"T","U","V"}, {"W","X","Y"}};
+    char keyboard[8][3][2] = {{"A","B","C"},{"D","E","F"},{"G","H","I"},{"J","K","L"},{"M","N","O"}, {"P","R","S"}, {"T", "U", "V"}, {"W","X","Y"}};
 };
 
 int main()
@@ -32,22 +32,22 @@ int main()
     }
     fin >> number;
     int max =0;
-    nn namenum;
+    namenum nn;
     nn.createCombos(0,0,number);
     int count;
-    for (int i =0; i<pow(3,strlen(number)); i++)(
+    for (int i =0; i<pow(3,strlen(number)); i++){
         char tmp;
-        int count = 0;
-        while(combos[i] != tmp){
+        count = 0;
+        while(nn.combos[i] != tmp){
             tmp = dict[count];
-            count++
+            count++;
         }
 
-    )
+    }
     return 0;
 }
 
-namenume::createCombos(int a, int loc,  char[20] number){
+void namenume::createCombos(int a, int loc,  char[20] number){
     for (int i =1; i<4; i++){}
         strcpy(combos[a], combos[max])
         combos[max][loc] = keyboard[number[loc]][i];
