@@ -8,6 +8,7 @@ int main(){
     int num;
     cin >> num;
     perfectNum(num);
+    return 0;
 }
 
 void perfectNum(int num){
