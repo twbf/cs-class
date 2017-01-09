@@ -4,16 +4,14 @@
 
 using namespace std;
 
-void perfectNum(int);
+int flip();
 
 int main(){
-    for (int i=1; i<1000001; i++){
-        perfectNum(i);
-    }
+
     return 0;
 }
 
-void perfectNum(int num){
+void flip(int num){
     int count=1;
     //cout << num << " divisors: 1";
     for (int i = 2; i<num; i++){
