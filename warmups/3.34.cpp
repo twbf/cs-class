@@ -1,26 +1,27 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
 int flip();
 
 int main(){
-
+    int tails=0, heads=0;
+    srand(time(NULL));
+    for (int i = 0; i<1000000000; i++){
+        if (flip()==1){
+            tails++;
+        } else{
+            heads++;
+        }
+    }
+    cout << "Heads: " << heads << "\nTails: " << tails << endl;
     return 0;
 }
 
-void flip(int num){
-    int count=1;
-    //cout << num << " divisors: 1";
-    for (int i = 2; i<num; i++){
-        if (num%i == 0){
-            //cout << '+' << i;
-            count += i;
-        }
-    }
-    if (num == count){
-        cout << num << endl;
-    }
+int flip(){
+    return rand()%2;
 }
