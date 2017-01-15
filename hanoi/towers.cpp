@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void switchPens(int, int , int, int);
+void switchPens(int, int , int, int, int);
 void move(int, int);
 void placeRings(int);
 int firstPin(int);
@@ -15,10 +15,19 @@ int main(){
     return 0;
 }
 
-void switchPens(int numPins, int original, int tmp, int moved){
+void switchPens(int numPins, int original, int tmp, int moved, numMoved){
+    for(int i = 0; i< numMoved+1; i++){
+        if (numMoved == 0){
+            move(original, moved);
+        } else if (num M){
+            move(moved, tmp);
+            move (original, moved);
+            move(tmp, original);
+        }
+    }
     if(numPins > 1){
-        
-        switchPens(numPins-1, original, tmp, moved);
+
+        switchPens(numPins-1, original, tmp, moved, numMoved +1);
     }
 }
 
