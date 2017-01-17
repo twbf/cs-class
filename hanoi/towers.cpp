@@ -11,18 +11,27 @@ int pins[3][10] = {};
 
 int main(){
     placeRings(3);
-    switchPens(3,0,1,2);
+    switchPens(3,0,1,2,0);
     return 0;
 }
 
-void switchPens(int numPins, int original, int tmp, int moved, numMoved){
+void switchPens(int numPins, int original, int tmp, int moved,int numMoved){
     for(int i = 0; i< numMoved+1; i++){
         if (numMoved == 0){
             move(original, moved);
-        } else if (num M){
+        } else if (numMoved == 1){
             move(moved, tmp);
             move (original, moved);
+            move(tmp, moved);
+        }
+        else {
+            move (moved, original);
+            move(moved, tmp);
+            move (original, tmp);
+            move (original, moved);
             move(tmp, original);
+            move (tmp, moved);
+            move (original, moved);
         }
     }
     if(numPins > 1){
