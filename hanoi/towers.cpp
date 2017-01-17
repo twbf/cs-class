@@ -1,3 +1,4 @@
+
 #include <iostream>
 
 using namespace std;
@@ -15,8 +16,11 @@ int main(){
     return 0;
 }
 
-void switchPens(int numPins, int original, int tmp, int moved,int numMoved){
+void switchPens(int numPins, int original, int tmp, int moved, int numMoved){
     for(int i = 0; i< numMoved+1; i++){
+        switchPens(numPins-1, original, tmp, moved, numMoved +1)
+        move (original, moved);
+        switchPens(numPins-1, original, tmp, moved, numMoved +1)
         if (numMoved == 0){
             move(original, moved);
         } else if (numMoved == 1){
