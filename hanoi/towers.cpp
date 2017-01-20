@@ -52,6 +52,6 @@ void move(int firstPin, int twoPin){
 
 void placeRings(int pins){
     for (int i = 0; i<pins; i++){
-        pins[0][i] = 1;
+        pins[0][i] = i+1;
     }
 }

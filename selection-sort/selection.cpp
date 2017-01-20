@@ -5,7 +5,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#define SIZE 500
+#define SIZE 20
 using namespace std;
 
 class insertionSort{
@@ -34,13 +34,15 @@ void insertionSort::printData(){
 void insertionSort::sort(){
     int index, min, tmp;
     for(int i = 0; i<SIZE; i++){
-        index = 0;
         min = numArray[i];
         for(int j = i; j<SIZE; j++){
             if (min > numArray[j]){
                 min = numArray[j];
                 index = j;
             }
+        }
+        if (min == numArray[i]){
+            index = i;
         }
         tmp = numArray[i];
         numArray[i] = numArray[index];
@@ -55,3 +57,11 @@ int main (){
     is.sort();
     is.printData();
 }
+
+/*
+thomas@thomas-gazelle:~/git/cs-class$ ./main
+34      96      7       71      99      4       2       73      84      1       40      88      93      63      31      76      88      37      16      33
+
+1       2       4       7       16      31      33      34      37      40      63      71      73      76      84      88      88      93      96      99
+
+*/
