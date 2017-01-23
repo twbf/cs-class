@@ -1,5 +1,11 @@
 /* Thomas Bueler    Selection Sort
 
+This program uses multiple functions, and one global varible "the size". The
+function sort() uses 2 arrays to sort the array.It goues through the unsorted
+part and finds the index of the least number then swaps it into the first part
+of the unsorted array making the sorted part longer. It does this untill it
+gets to the end; I had a giant off by one loop errror that took me forever to
+get fixed, but eventualy I found the bug.
 */
 
 #include <iostream>
