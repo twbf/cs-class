@@ -5,14 +5,18 @@
 using namespace std;
 
 int move(int, int, int);
+int testMove(int, int);
 void zeroPlaces();
 
 int places[8][8] = {};
 
 int main (){
-    while (move(4,4,0) < 40){
+    srand(time(0));
+    int accesible[8][8] = 
+    while (move(0,0,0) < 49){
         zeroPlaces();
     }
+    cout << "Got It" << endl;
     return 0;
 }
 
@@ -40,33 +44,38 @@ int move(int x, int y, int i){
     places[x][y] = 1;
 
     int success = false;
-    srand(time(0));
     if (i==64){
         return i;
     }
     int h = 0;
     while (!success){
         h++;
-        if (h==100){
+        if (h==1000){
             success = true;
         }
         int number = rand()%8;
         int nX = x+hor[number];
         int nY = y+ver[number];
-        if (0<nX && nX<8){
-            if (0<nY  && nY<8){
-                if (places[nX][nY] != 1){
-                    success = true;
-                    //cout << nX << " , " << nY << "   " << i << endl;
-                    i++;
+        if(testMove(nX, nY) == 1){
+            success = true;
+            //cout << nX << " , " << nY << "   " << i << endl;
+            i++;
+            i = move(nX, nY, i);
+        }
+    }
+    //cout << i << endl;
+    return i;
+}
 
-                    move(nX, nY, i);
-                }
+int testMove(int x, int y){
+    if (0<x && x<8){
+        if (0<y  && y<8){
+            if (places[x][y] != 1){
+                return 1;
             }
         }
     }
-    cout << i << endl;
-    return i;
+    return 0;
 }
 
 void zeroPlaces(){
