@@ -22,11 +22,13 @@ int main (){
             fin >> accesible[i][j];
         }
     }
-
-    while (move(4,4,0) < 64){
-        //cout << "skjdfhkj" << endl;
-        zeroPlaces();
+    for (int i = 0; i<8; i++){
+        for (int j = 0; j<8; j++){
+            cout << move(i,j,0) << endl;;
+            zeroPlaces();
+        }
     }
+
     cout << "Got It" << endl;
     return 0;
 }
@@ -52,12 +54,16 @@ int move(int x, int y, int i){
     ver[6] = 2;
     ver[7] = 1;
     i++;
-    printBoard();
+    //printBoard();
     if (i == 64) {
         return i;
     }
     places[x][y] = 1;
     int number = testMove(x,y);
+    //cout << number << endl;
+    if (number == -1){
+        return i;
+    }
     int nX = x+hor[number];
     int nY = y+ver[number];
     i = move(nX, nY, i);
@@ -85,18 +91,18 @@ int testMove(int X, int Y){
     ver[6] = 2;
     ver[7] = 1;
 
-    int min = 0;
+    int min = -1;
 
     for (int i = 0; i < 8; i++){
         int x = X+hor[i];
         int y = Y+ver[i];
-        if (0<x && x<8){
-            if (0<y  && y<8){
+        if (0<=x && x<8){
+            if (0<=y  && y<8){
                 if (places[x][y] != 1){
-                    if (accesible[x][y]< accesible[X+hor[min]][Y+ver[min]]){
-                        cout << min;
+                    //if (accesible[x][y]< accesible[X+hor[min]][Y+ver[min]]){
+                        //cout << min;
                         min = i;
-                    }
+                    //}
                 }
             }
         }
