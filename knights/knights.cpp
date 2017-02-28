@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <time.h>
+#include <string>
 
 using namespace std;
 
@@ -14,9 +15,8 @@ int places[8][8] = {};
 int accesible[8][8] = {};
 
 int main (){
-    ifstream fin ("aseccible.in");
+    ifstream fin ("knights/aseccible.in");
     srand(time(0));
-
     for (int i = 0; i<8; i++){
         for (int j = 0; j<8; j++){
             fin >> accesible[i][j];
@@ -24,7 +24,8 @@ int main (){
     }
     for (int i = 0; i<8; i++){
         for (int j = 0; j<8; j++){
-            cout << move(i,j,0) << endl;;
+            cout << move(i,j,1) << endl;
+            //printBoard();
             zeroPlaces();
         }
     }
@@ -91,7 +92,8 @@ int testMove(int X, int Y){
     ver[6] = 2;
     ver[7] = 1;
 
-    int min = -1;
+    int min = 0;
+    bool validspace = false;
 
     for (int i = 0; i < 8; i++){
         int x = X+hor[i];
@@ -99,15 +101,20 @@ int testMove(int X, int Y){
         if (0<=x && x<8){
             if (0<=y  && y<8){
                 if (places[x][y] != 1){
-                    //if (accesible[x][y]< accesible[X+hor[min]][Y+ver[min]]){
+                    validspace = true;
+                    if (accesible[x][y] < accesible[X+hor[min]][Y+ver[min]]){
                         //cout << min;
                         min = i;
-                    //}
+                    }
                 }
             }
         }
     }
-    return min;
+    if (validspace == false){
+        return -1;
+    }else{
+        return min;
+    }
 }
 
 void zeroPlaces(){

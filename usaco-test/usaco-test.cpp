@@ -13,9 +13,10 @@ using namespace std;
 int main()
 {
     ofstream fout ("test.out");
-    ifstream fin ("beads.in");
+    ifstream fin ("usaco-test/test.in");
     int a, b;
     fin >> a >> b;
-    fout << a+b << endl;
+    cout << a << endl;
+    cout << a+b << endl;
     return 0;
 }
