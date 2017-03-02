@@ -71,6 +71,7 @@ int move(int x, int y, int i){
             success = true;
             //cout << nX << " , " << nY << "   " << i << endl;
             i++;
+            places[nX][nY] = 1;
             i = move(nX, nY, i);
         }
     }
