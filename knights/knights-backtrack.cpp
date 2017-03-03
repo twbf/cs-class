@@ -13,28 +13,10 @@ int printBoard();
 
 int places[8][8] = {};
 int accesible[8][8] = {};
+int moves [64][3] = {};
+int hor[8], ver[8];
 
 int main (){
-    ifstream fin ("knights/aseccible.in");
-    srand(time(0));
-    for (int i = 0; i<8; i++){
-        for (int j = 0; j<8; j++){
-            fin >> accesible[i][j];
-        }
-    }
-    for (int i = 0; i<1; i++){
-        for (int j = 0; j<1; j++){
-            cout << move(i,j,1) << endl;
-            //printBoard();
-            zeroPlaces();
-        }
-    }
-    return 0;
-}
-
-int move(int x, int y, int i){
-    int hor[8], ver[8];
-
     hor[0] = 2;
     hor[1] = 1;
     hor[2] = -1;
@@ -52,6 +34,20 @@ int move(int x, int y, int i){
     ver[5] = 2;
     ver[6] = 2;
     ver[7] = 1;
+    for (int i = 0; i<1; i++){
+        for (int j = 0; j<1; j++){
+            cout << move(i,j,0) << endl;
+            //printBoard();
+            zeroPlaces();
+        }
+    }
+    return 0;
+}
+
+int move(int x, int y, int i){
+    moves[i][0] = x;
+    moves[i][1] = y;
+    moves[i][2]++;
     i++;
     printBoard();
     if (i == 64) {
@@ -61,8 +57,7 @@ int move(int x, int y, int i){
     int number = testMove(x,y);
     //cout << number << endl;
     if (number == -1){
-        cout << "dang" << endl;
-        return i;
+        i = move(moves[i--][0], moves[i--][0], i--);
     }
     int nX = x+hor[number];
     int nY = y+ver[number];
@@ -71,50 +66,16 @@ int move(int x, int y, int i){
 }
 
 int testMove(int X, int Y){
-    int hor[8], ver[8];
-
-    hor[0] = 2;
-    hor[1] = 1;
-    hor[2] = -1;
-    hor[3] = -2;
-    hor[4] = -2;
-    hor[5] = -1;
-    hor[6] = 1;
-    hor[7] = 2;
-
-    ver[0] = -1;
-    ver[1] = -2;
-    ver[2] = -2;
-    ver[3] = -1;
-    ver[4] = 1;
-    ver[5] = 2;
-    ver[6] = 2;
-    ver[7] = 1;
-
-    int min = 0, nY, nX;
+    int min = 0;
     bool validspace = false;
-
+    int counter = 
     for (int i = 0; i < 8; i++){
         int x = X+hor[i];
         int y = Y+ver[i];
-        if (accesible[X+hor[min]][Y+ver[min]]>1){
-            nX = X+hor[min];
-            nY = Y+ver[min];
-        }
-        else{
-            nX = 2;
-            nY = 2;
-        }
-        if (0<=x && x<8){
-            if (0<=y  && y<8){
-                if (places[x][y] != 1){
-                    validspace = true;
-                    if (accesible[x][y] < accesible[nX][nY]){
-                        //cout << min;
-                        min = i;
-                    }
-                }
-            }
+        if ((0<=x && x<8) && (0<=y  && y<8) && (places[x][y] != 1)){
+            validspace = true;
+            min = i;
+            i = 8;
         }
     }
     if (validspace == false){
