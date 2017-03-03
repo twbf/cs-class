@@ -25,7 +25,7 @@ int main (){
     for (int i = 0; i<8; i++){
         for (int j = 0; j<8; j++){
             cout << move(i,j,1) << endl;
-            printBoard();
+            //printBoard();
             zeroPlaces();
         }
     }
@@ -68,7 +68,6 @@ int move(int x, int y, int i){
     }
     int nX = x+hor[number];
     int nY = y+ver[number];
-    places[nX][nY] = 1;
     i = move(nX, nY, i);
     return i;
 }
@@ -100,7 +99,7 @@ int testMove(int X, int Y){
     for (int i = 0; i < 8; i++){
         int x = X+hor[i];
         int y = Y+ver[i];
-        if ((0<=X+hor[min] && X+hor[min]<8) || (0<=Y+ver[min] && Y+ver[min]<8)){
+        if (accesible[X+hor[min]][Y+ver[min]]>1){
             nX = X+hor[min];
             nY = Y+ver[min];
         }
