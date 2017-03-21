@@ -36,10 +36,10 @@ int main (){
     ver[6] = 2;
     ver[7] = 1;
     for (int i = 5; i<6; i++){
-        for (int j = 0; j<2; j++){
+        for (int j = 0; j<1; j++){
             cout << move(i,j,0) << endl;
-            //printBoard();
-            //printMoves();
+            printBoard();
+            printMoves();
             zeroPlaces();
             cout << numMoves << endl;
         }
@@ -48,21 +48,30 @@ int main (){
 }
 
 int move(int x, int y, int i){
+    //printMoves();
+    printBoard();
     moves[i][0] = x;
     moves[i][1] = y;
-    printMoves();
+    cout << i << endl;
     places[x][y] = 1;
     if (i == 63) {
         return i;
     }
-    printBoard();
     int number = testMove(x,y,i);
     numMoves++;
     if (number == -1){
-        places[x][y] = 0;
-        moves[i][0] = 0;
-        moves[i][1] = 0;
-        i = move(moves[i--][0], moves[i--][1], i--);
+        moves[i][2]++;
+        if (moves[i][2] > 7){
+            places[x][y] = 0;
+            moves[i][0] = 0;
+            moves[i][1] = 0;
+            moves[i][2] = 0;
+            i--;
+            i--;
+            i = move(moves[i][0], moves[i][1], i);
+        } else {
+            i = move(moves[i][0], moves[i][1], i);
+        }
     } else {
         int nX = x+hor[number];
         int nY = y+ver[number];
@@ -80,7 +89,7 @@ int testMove(int X, int Y, int j){
     for (int i = 0; i < 8; i++){
         int x = X+hor[i];
         int y = Y+ver[i];
-        if ((0<=x && x<8) && (0<=y  && y<8) && (places[x][y] != 1)){
+        if ((0<=x && x<8) && (0<=y  && y<8) && (places[x][y] < 1)){
             if(counter == cMoves){
                 validspace = true;
                 min = i;
@@ -92,7 +101,6 @@ int testMove(int X, int Y, int j){
     if (validspace == false){
         return -1;
     }else{
-        moves[j][2]++;
         return min;
     }
 }
