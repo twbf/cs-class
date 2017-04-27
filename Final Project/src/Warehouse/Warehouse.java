@@ -38,6 +38,7 @@ public class Warehouse {
         System.out.println("************************************************************************\n");
         System.out.println("\t\t\t\t\tAvailable storage:\t"+(10000-gallonsTotal)+"\n");
         //main warehouse menu
+        menu();
     }
 
     public void openFile(){
@@ -49,12 +50,28 @@ public class Warehouse {
     }
     catch(IOException ioexp)
     {
-        System.out.println("IOEXCEPTIO     N");
+        System.out.println("IOEXCEPT   ION");
     }
 
     }
 
     public void getData()
+    {
+        size = Integer.parseInt(getNext() );//inventory amount
+        for(int i = 0; i < size; i++)
+        {
+            String fla = getNext();
+            int iv = Integer.parseInt(getNext());
+            double cost = Double.parseDouble(getNext());
+            double price = Double.parseDouble(getNext());
+            int exp = Integer.parseInt((getNext()));
+            int gal = Integer.parseInt(getNext());
+            iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
+            ic.add(newFlav);
+            gallonsTotal+= iv;
+        }
+    }
+    public void save()
     {
         size = Integer.parseInt(getNext() );//inventory amount
         for(int i = 0; i < size; i++)
@@ -97,9 +114,57 @@ public class Warehouse {
 
     public void menu()
     {
-
+        int i =0;
+        Scanner sc = new Scanner(System.in);
+        while (i!=4){
+            System.out.println("************************************************************************\n");
+            System.out.println("1. Transaction menu\n");
+            System.out.println("2. Inventory Report\n");
+            System.out.println("3. Expiration Report\n");
+            System.out.println("4. Clean and Cose file\n");
+            i = sc.nextInt();
+            switch (i){
+                case 1:
+                    transactionMenu();
+                case 2:
+                    System.out.println("************************************************************************\n");
+                    System.out.println("\t\tFLAVOR\t\t\tIN STOCK\tPRICE\tCOST\n");
+                    System.out.println("------------------------------------------------------------------------\n\n");
+                    reportInventory();
+                    System.out.println("************************************************************************\n");
+                    System.out.println("\t\t\t\t\tAvailable storage:\t"+(10000-gallonsTotal)+"\n");
+                case 3:
+                    expirationReport();
+                case 4:
+                    save();
+            }
+        }
     }
-
+    
+    public void transactionMenu(){
+        int i =0;
+        Scanner sc = new Scanner(System.in);
+        while (i!=4){
+            System.out.println("************************************************************************\n");
+            System.out.println("1. Purchase Ice Cream\n");
+            System.out.println("2. Sale Ice Cream\n");
+            System.out.println("3. Remove and Destroy Ice Cream\n");
+            System.out.println("4. Update Inventory Information\n");
+            System.out.println("5. Return to Previous Menu\n");
+            i = sc.nextInt();
+            switch (i){
+                case 1:
+                    transactionMenu();
+                case 2:
+                case 3:
+                    expirationReport();
+                case 4:
+                    saveAndClose();
+                case 5:
+                    menu();
+            }
+        }
+    }
     public static void main(String[] args) {
         Warehouse w = new Warehouse("test.in");
     }
