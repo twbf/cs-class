@@ -182,12 +182,12 @@ public class Warehouse {
     public void newIceCream(){
         Scanner sc = new Scanner(System.in);
         
-        i = sc.nextInt();
-        i = sc.nextInt();
-        i = sc.nextInt();
-        price = sc.nextInt();
-        exp = sc.nextInt();
-        gal = sc.nextInt();
+        private String fla = "id gj";
+        private double cost  = 2.90;
+        private double price = 2;
+        int iv = 2;
+        int exp = 2;
+        int gal = 2;
         
         iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
         transactionMenu();
