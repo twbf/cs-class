@@ -168,7 +168,7 @@ public class Warehouse {
             i = sc.nextInt();
             switch (i){
                 case 1:
-                    transactionMenu();
+                    newIceCream();
                 case 2:
                 case 3:
                     expirationReport();
@@ -179,6 +179,20 @@ public class Warehouse {
             }
         }
     }
+    public void newIceCream(){
+        Scanner sc = new Scanner(System.in);
+        
+        i = sc.nextInt();
+        i = sc.nextInt();
+        i = sc.nextInt();
+        price = sc.nextInt();
+        exp = sc.nextInt();
+        gal = sc.nextInt();
+        
+        iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
+        transactionMenu();
+    }
+    
     public static void main(String[] args) {
         Warehouse w = new Warehouse("test.in");
     }
