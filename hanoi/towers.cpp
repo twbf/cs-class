@@ -1,11 +1,12 @@
 /* Towers of Hanoi   Thomas Bueler
-    This program is very tough if you don't have a good algoritheeothem. Before
-    I looked at the cheatsheet I had a program that was minuplating a 2-d array
-    reperesentation of the pins where the disks were labeled 1-10, and a place
+
+    This program is very tough if you don't have a good algorithm. Before
+    I looked at the cheatsheet I had a program that was miniplating a 2-d array
+    reperesentition of the pins where the disks were labeled 1-10, and a place
     without a disk is labeled a 0. In fact the program is so simple, even with
     the counter that I added in. The base case for the function is when the
-    number of pins = 1; when they dont you call the funtion 3 times changing
-    the sources dest and aux order each time. This follows the 1213121 pattern
+    number of pins = 1; when they don't you call the function 3 times changing
+    the sources, dest, and aux order each time. This follows the 1213121 pattern
     I was noticing before the cheat sheet came along.
 */
 

@@ -1,7 +1,7 @@
 /*  Thomas Bueler    Alpha Sort
 
 This sorts words using the strcmp function with the algoritheam being selection
-sort because I think that its the esiest to program. The size variable up top
+sort because I think that its the easiest to program. The size variable up top
 determines how many words you cin. It is actualy a vary simple if you know about
 strcmp.
 */
