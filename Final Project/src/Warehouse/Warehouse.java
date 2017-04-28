@@ -1,10 +1,12 @@
 
 
 package Warehouse;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
+import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+
 
 
 import java.io.BufferedReader;
@@ -73,18 +75,30 @@ public class Warehouse {
     }
     public void save()
     {
-        size = Integer.parseInt(getNext() );//inventory amount
-        for(int i = 0; i < size; i++)
+        output = "";
+        output += size;
+        output += "\n";
+        for (iceCream i:ic){
+            output+=i.getFlavor();
+            output+="\n";
+            output+=i.getInventory();
+            output+="\n";
+            output+=i.getCost();
+            output+="\n";
+            output+=i.getPrice();
+            output+="\n";
+            output+=0;
+            output+="\n";
+            output+=0;
+            output+="\n";
+        }
+        try {
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("test.in")));
+            out.println(output);
+            out.close();
+        }  catch(IOException ioexp)
         {
-            String fla = getNext();
-            int iv = Integer.parseInt(getNext());
-            double cost = Double.parseDouble(getNext());
-            double price = Double.parseDouble(getNext());
-            int exp = Integer.parseInt((getNext()));
-            int gal = Integer.parseInt(getNext());
-            iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
-            ic.add(newFlav);
-            gallonsTotal+= iv;
+            System.out.println("IOEXCEPT   ION");
         }
     }
 
@@ -159,7 +173,7 @@ public class Warehouse {
                 case 3:
                     expirationReport();
                 case 4:
-                    saveAndClose();
+                    save();
                 case 5:
                     menu();
             }
