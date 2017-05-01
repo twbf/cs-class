@@ -140,6 +140,7 @@ public class Warehouse {
             switch (i){
                 case 1:
                     transactionMenu();
+                    break();
                 case 2:
                     System.out.println("************************************************************************\n");
                     System.out.println("\t\tFLAVOR\t\t\tIN STOCK\tPRICE\tCOST\n");
@@ -147,10 +148,16 @@ public class Warehouse {
                     reportInventory();
                     System.out.println("************************************************************************\n");
                     System.out.println("\t\t\t\t\tAvailable storage:\t"+(10000-gallonsTotal)+"\n");
+                    break;
                 case 3:
                     expirationReport();
+                    break();
                 case 4:
                     save();
+                    break();
+                default:
+                    System.out.println("Invalid Entry");
+                    menu();
             }
         }
     }
@@ -169,28 +176,56 @@ public class Warehouse {
             switch (i){
                 case 1:
                     newIceCream();
+                    break;
                 case 2:
                 case 3:
                     expirationReport();
+                    break;
                 case 4:
                     save();
+                    break;
                 case 5:
                     menu();
+                    break;
+                default:
+                    System.out.println("Invalid Entry");
+                    transactionMenu();
             }
         }
     }
     public void newIceCream(){
+        System.out.println("Enter new Flavor:");
         Scanner sc = new Scanner(System.in);
+        String fla = sc.next();
         
-        private String fla = "id gj";
-        private double cost  = 2.90;
-        private double price = 2;
-        int iv = 2;
-        int exp = 2;
-        int gal = 2;
+        System.out.println("Enter Cost:");
+        sc = new Scanner(System.in);
+        double cost  = sc.nextDouble();
+        
+        System.out.println("Enter Price:");
+        sc = new Scanner(System.in);
+        double price = sc.nextDouble();
+        
+        System.out.println("Enter Inventory:");
+        sc = new Scanner(System.in);
+        int iv = sc.nextInt();
+        
+        System.out.println("Enter Experaton Date:");
+        sc = new Scanner(System.in);
+        int exp = sc.nextInt();
+        
+        System.out.println("Enter Gallons:");
+        sc = new Scanner(System.in);
+        int gal = sc.nextInt();
         
         iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
+        int i = spot(fla);
+        ic.add(1, newFlav);
         transactionMenu();
+    }
+    
+    public int spot (String fla){
+        
     }
     
     public static void main(String[] args) {
