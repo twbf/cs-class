@@ -154,7 +154,7 @@ public class Warehouse {
                     break();
                 case 4:
                     save();
-                    break();
+                    break;
                 default:
                     System.out.println("Invalid Entry");
                     menu();
@@ -194,6 +194,7 @@ public class Warehouse {
         }
     }
     public void newIceCream(){
+        size++;
         System.out.println("Enter new Flavor:");
         Scanner sc = new Scanner(System.in);
         String fla = sc.next();
@@ -220,12 +221,24 @@ public class Warehouse {
         
         iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
         int i = spot(fla);
-        ic.add(1, newFlav);
+        ic.add(i, newFlav);
         transactionMenu();
     }
     
     public int spot (String fla){
-        
+        int counter = 0;
+        String other;
+        for(iceCream i:ic){
+            System.out.println(counter);
+            other = i.getFlavor();
+
+            if (0 >= fla.compareTo(other)){
+                System.out.println("eeeee");
+               return counter;
+            }
+            counter ++;
+        }
+        return counter;
     }
     
     public static void main(String[] args) {
