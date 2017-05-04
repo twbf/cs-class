@@ -227,18 +227,22 @@ public class Warehouse {
     
     public int spot (String fla){
         int counter = 0;
+        fla = fla.toLowerCase();
         String other;
         for(iceCream i:ic){
             System.out.println(counter);
             other = i.getFlavor();
-
-            if (0 >= fla.compareTo(other)){
+            other = other.toLowerCase();
+            if (fla.compareTo(other)<0){
                 System.out.println("eeeee");
                return counter;
             }
             counter ++;
         }
         return counter;
+    }
+    
+    public void sale(){
     }
     
     public static void main(String[] args) {
