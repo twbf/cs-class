@@ -125,6 +125,14 @@ public class Warehouse {
             System.out.println("\t\t"+i.getFlavor()+"\t\t"+i.getInventory()+"\t\t"+i.getPrice()+ "\t"+i.getCost());
         }
     }
+    public String report()
+    {
+        String add = "";
+        for(iceCream i:ic){
+            add += "\t\t"+i.getFlavor()+"\t\t"+i.getInventory()+"\t\t"+i.getPrice()+ "\t"+i.getCost();
+        }
+        return add;
+    }
 
     public void menu()
     {
