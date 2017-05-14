@@ -118,22 +118,15 @@ public class Warehouse1 {
         }
         return " ";
     }
-
-    public void reportInventory()
-    {
-        for(iceCream i:ic){
-            System.out.println("\t\t"+i.getFlavor()+"\t\t"+i.getInventory()+"\t\t"+i.getPrice()+ "\t"+i.getCost());
-        }
-    }
     public String report()
     {
-        String add = "";
+        String add = "<table><tr><th>Flavor</th><th>Inventory</th><th>Price</th><th>Cost</th></tr>";
         for(iceCream i:ic){
-            add += "\n\n\t\t"+i.getFlavor()+"\t\t"+i.getInventory()+"\t\t"+i.getPrice()+ "\t"+i.getCost();
+            add += "<tr><td>"+i.getFlavor()+"</td><td>"+i.getInventory()+"</td><td>"+i.getPrice()+ "</td><td>"+i.getCost()+"</td><tr>";
         }
+        add+="<tr>Available storage: "+(10000-gallonsTotal)+"</tr><table>";
         return add;
     }
-
     public void menu()
     {
         int i =0;
@@ -201,36 +194,46 @@ public class Warehouse1 {
             }
         }
     }
-    public void newIceCream(){
+    public void newIceCream(String fla, String cost , String price, String iv, String exp, String gal){
         size++;
-        System.out.println("Enter new Flavor:");
-        Scanner sc = new Scanner(System.in);
-        String fla = sc.next();
-        
-        System.out.println("Enter Cost:");
-        sc = new Scanner(System.in);
-        double cost  = sc.nextDouble();
-        
-        System.out.println("Enter Price:");
-        sc = new Scanner(System.in);
-        double price = sc.nextDouble();
-        
-        System.out.println("Enter Inventory:");
-        sc = new Scanner(System.in);
-        int iv = sc.nextInt();
-        
-        System.out.println("Enter Experaton Date:");
-        sc = new Scanner(System.in);
-        int exp = sc.nextInt();
-        
-        System.out.println("Enter Gallons:");
-        sc = new Scanner(System.in);
-        int gal = sc.nextInt();
-        
-        iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
-        int i = spot(fla);
-        ic.add(i, newFlav);
-        transactionMenu();
+        int spot = getFlavorSpot(fla);
+        if (spot!=-1){
+            ic.get(spot).setCost(Double.parseDouble(cost));
+            ic.get(spot).setPrice(Double.parseDouble(price));
+            ic.get(spot).setInventory(Integer.parseInt(iv));
+            ic.get(spot).setDaysToExp(Integer.parseInt(exp));
+            ic.get(spot).setSold(Integer.parseInt(gal));
+        } else {
+            double intCost = Double.parseDouble(cost);
+            double intPrice = Double.parseDouble(price);
+            int intIv = Integer.parseInt(iv);
+            int intExp = Integer.parseInt(exp);
+            int intGal = Integer.parseInt(gal);
+            iceCream newFlav = new iceCream(fla, intCost, intPrice, intIv, intExp, intGal);
+            int i = spot(fla);
+            ic.add(i, newFlav);
+        }
+    }
+    
+    public void removeIceCream (String fla){
+        size--;
+        int i = getFlavorSpot(fla);
+        ic.remove(i);
+    }
+    
+    public int getFlavorSpot(String fla){
+        int counter = 0;
+        fla = fla.toLowerCase();
+        String other;
+        for(iceCream i:ic){
+            other = i.getFlavor();
+            other = other.toLowerCase();
+            if (fla.compareTo(other)==0){
+               return counter;
+            }
+            counter ++;
+        }
+        return -1;
     }
     
     public int spot (String fla){
