@@ -1,13 +1,10 @@
-
-
 package examples;
 import java.util.*;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-
-
-
+import java.io.File;
+import java.io.FileNotFoundException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,15 +29,6 @@ public class Warehouse1 {
         fileOut = in;
         gallonsTotal= 0;
         openFile();
-        //Opening menu
-        //System.out.println("************************************************************************\n");
-        //System.out.println("\t\tFLAVOR\t\t\tIN STOCK\tPRICE\tCOST\n");
-        //System.out.println("------------------------------------------------------------------------\n\n");
-        //reportInventory();
-        //System.out.println("************************************************************************\n");
-        //System.out.println("\t\t\t\t\tAvailable storage:\t"+(10000-gallonsTotal)+"\n");
-        //main warehouse menu
-        //menu();
     }
 
     public void openFile(){
@@ -59,18 +47,25 @@ public class Warehouse1 {
 
     public void getData()
     {
-        size = Integer.parseInt(getNext() );//inventory amount
-        for(int i = 0; i < size; i++)
-        {
-            String fla = getNext();
-            int iv = Integer.parseInt(getNext());
-            double cost = Double.parseDouble(getNext());
-            double price = Double.parseDouble(getNext());
-            int exp = Integer.parseInt((getNext()));
-            int gal = Integer.parseInt(getNext());
-            iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
-            ic.add(newFlav);
-            gallonsTotal+= iv;
+        File file = new File("test.in");
+        try{
+            Scanner sc = new Scanner(file);
+            size = Integer.parseInt(sc.nextLine());//inventory amount
+            for(int i = 0; i < size; i++)
+            {
+                String fla = sc.nextLine();
+                System.out.println(fla);
+                int iv = Integer.parseInt(sc.nextLine());
+                double cost = Double.parseDouble(sc.nextLine());
+                double price = Double.parseDouble(sc.nextLine());
+                int exp = Integer.parseInt((sc.nextLine()));
+                int gal = Integer.parseInt(sc.nextLine());
+                iceCream newFlav = new iceCream(fla, cost, price, iv, exp, gal);
+                ic.add(newFlav);
+                gallonsTotal+= iv;
+            }
+        } catch (FileNotFoundException e) {
+        e.printStackTrace();
         }
     }
     public void save()
@@ -78,18 +73,28 @@ public class Warehouse1 {
         output = "";
         output += size;
         output += "\n";
+        int days = 0;
         for (iceCream i:ic){
+            days = i.getDaysToExp()-1;
             output+=i.getFlavor();
             output+="\n";
-            output+=i.getInventory();
+            if (days==0){
+                output+=0;
+            } else {
+                output+=i.getInventory();
+            }
             output+="\n";
             output+=i.getCost();
             output+="\n";
-            output+=i.getPrice();
+            if(days==10){
+                output+=i.getPrice()/2;
+            } else {
+                output+=i.getPrice();
+            }
             output+="\n";
-            output+=0;
+            output+=i.getDaysToExp()-1;
             output+="\n";
-            output+=0;
+            output+=i.getSold();
             output+="\n";
         }
         try {
@@ -118,95 +123,31 @@ public class Warehouse1 {
         }
         return " ";
     }
+    
     public String report()
     {
-        String add = "<table><tr><th>Flavor</th><th>Inventory</th><th>Price</th><th>Cost</th></tr>";
+        String add = "<table><tr><th>Flavor</th><th>Inventory</th><th>Price</th><th>Cost</th><th>Days To Exp</th><th>Sold</th></tr>";
         for(iceCream i:ic){
-            add += "<tr><td>"+i.getFlavor()+"</td><td>"+i.getInventory()+"</td><td>"+i.getPrice()+ "</td><td>"+i.getCost()+"</td><tr>";
+            add += "<tr><td>"+i.getFlavor()+"</td><td>"+i.getInventory()+"</td><td>"+i.getPrice()+ "</td><td>"+i.getCost()+"</td><td>"+i.getDaysToExp()+"</td><td>"+i.getSold()+"</td><tr>";
         }
         add+="<tr>Available storage: "+(10000-gallonsTotal)+"</tr><table>";
         return add;
     }
-    public void menu()
-    {
-        int i =0;
-        Scanner sc = new Scanner(System.in);
-        while (i!=4){
-            System.out.println("************************************************************************\n");
-            System.out.println("1. Transaction menu\n");
-            System.out.println("2. Inventory Report\n");
-            System.out.println("3. Expiration Report\n");
-            System.out.println("4. Clean and Cose file\n");
-            i = sc.nextInt();
-            switch (i){
-                case 1:
-                    transactionMenu();
-                    break();
-                case 2:
-                    System.out.println("************************************************************************\n");
-                    System.out.println("\t\tFLAVOR\t\t\tIN STOCK\tPRICE\tCOST\n");
-                    System.out.println("------------------------------------------------------------------------\n\n");
-                    reportInventory();
-                    System.out.println("************************************************************************\n");
-                    System.out.println("\t\t\t\t\tAvailable storage:\t"+(10000-gallonsTotal)+"\n");
-                    break;
-                case 3:
-                    expirationReport();
-                    break();
-                case 4:
-                    save();
-                    break;
-                default:
-                    System.out.println("Invalid Entry");
-                    menu();
-            }
-        }
-    }
     
-    public void transactionMenu(){
-        int i =0;
-        Scanner sc = new Scanner(System.in);
-        while (i!=4){
-            System.out.println("************************************************************************\n");
-            System.out.println("1. Purchase Ice Cream\n");
-            System.out.println("2. Sale Ice Cream\n");
-            System.out.println("3. Remove and Destroy Ice Cream\n");
-            System.out.println("4. Update Inventory Information\n");
-            System.out.println("5. Return to Previous Menu\n");
-            i = sc.nextInt();
-            switch (i){
-                case 1:
-                    newIceCream();
-                    break;
-                case 2:
-                case 3:
-                    expirationReport();
-                    break;
-                case 4:
-                    save();
-                    break;
-                case 5:
-                    menu();
-                    break;
-                default:
-                    System.out.println("Invalid Entry");
-                    transactionMenu();
-            }
-        }
-    }
     public void newIceCream(String fla, String cost , String price, String iv, String exp, String gal){
-        size++;
         int spot = getFlavorSpot(fla);
-        if (spot!=-1){
+        if (spot!=-1&&ic.get(spot).getDaysToExp()==Integer.parseInt(exp)){
             ic.get(spot).setCost(Double.parseDouble(cost));
             ic.get(spot).setPrice(Double.parseDouble(price));
             ic.get(spot).setInventory(Integer.parseInt(iv));
             ic.get(spot).setDaysToExp(Integer.parseInt(exp));
             ic.get(spot).setSold(Integer.parseInt(gal));
         } else {
+            size++;
             double intCost = Double.parseDouble(cost);
             double intPrice = Double.parseDouble(price);
             int intIv = Integer.parseInt(iv);
+            gallonsTotal+=intIv;
             int intExp = Integer.parseInt(exp);
             int intGal = Integer.parseInt(gal);
             iceCream newFlav = new iceCream(fla, intCost, intPrice, intIv, intExp, intGal);

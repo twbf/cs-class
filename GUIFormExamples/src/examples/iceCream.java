@@ -77,6 +77,20 @@ public class iceCream {
     public void setPrice(double p){
         price = p;
     }
+    public int getDaysToExp(){
+        return daysToExp;
+    }
+
+    public void setDaysToExp (int p){
+        daysToExp = p;
+    }
+    public int getSold(){
+        return sold;
+    }
+
+    public void setSold(int p){
+        sold = p;
+    }
 
     //removes i gallons of ice Cream if possible, if not remove the total and return that amount
     public int removeInventory(int i)

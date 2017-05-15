@@ -183,7 +183,7 @@ public class WarehouseUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(data, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .add(data, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -262,11 +262,11 @@ public class WarehouseUI extends javax.swing.JFrame {
                         .add(28, 28, 28)
                         .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(145, 145, 145)
                         .add(jLabel1)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 40, Short.MAX_VALUE)
+                .add(12, 12, 12)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                     .add(layout.createSequentialGroup()
                         .add(jButton1)
