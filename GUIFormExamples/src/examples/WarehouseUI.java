@@ -83,6 +83,12 @@ public class WarehouseUI extends javax.swing.JFrame {
             }
         });
 
+        Text4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Text4ActionPerformed(evt);
+            }
+        });
+
         jButton2.setText("Add Ice Cream");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,6 +337,10 @@ public class WarehouseUI extends javax.swing.JFrame {
         removeFla.setText("");
         getData();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void Text4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Text4ActionPerformed
+
+    }//GEN-LAST:event_Text4ActionPerformed
     
     private void getData(){
         String formatted = ware.report();

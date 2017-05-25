@@ -193,12 +193,4 @@ public class Warehouse1 {
         }
         return counter;
     }
-    
-    public void sale(){
-    }
-    
-   // public static void main(String[] args) {
-    //    Warehouse t = new Warehouse();
-     //   Warehouse1 w = new Warehouse1("test.in");
-   // }
 }
