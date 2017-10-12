@@ -23,8 +23,14 @@ int main (){
     printBoard();
 }
 
-int moves (){
-    
+int moves (int piece){
+    int kindOfPeice = abs(peice);
+    int side = 0;
+    if (peice!=kindOfPeice){
+        side=1;
+    }
+    //put into peice functons
+    return 0;
 }
 
  int printBoard(){
