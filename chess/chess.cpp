@@ -8,8 +8,10 @@ using namespace std;
 
 void zeroPlaces();
 int printBoard();
+int createMoves(int, int, int);
 
 int places[8][8] = {};
+int moves[100][2] = {};
 
 
 int main (){
@@ -21,17 +23,43 @@ int main (){
         }
     }
     printBoard();
+    createMoves(-1,0,0);
 }
 
-int moves (int piece){
-    int kindOfPeice = abs(peice);
+int createMoves (int piece, int x, int y){
+    int kindOfPeice = abs(piece);
     int side = 0;
-    if (peice!=kindOfPeice){
+    if (piece!=kindOfPeice){
         side=1;
     }
     //put into peice functons
     return 0;
 }
+
+void rook(int x, int y, bool pos){
+
+}
+
+void castle(int x, int y, bool pos){
+
+}
+
+void queen(int x, int y, bool pos){
+
+}
+
+void pawn(int x, int y, bool pos){
+
+}
+
+void king(int x, int y, bool pos){
+
+}
+
+void bishop(int x, int y){
+
+}
+
 
  int printBoard(){
      cout << endl;
