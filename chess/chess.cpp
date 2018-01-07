@@ -11,7 +11,8 @@ int printBoard();
 int createMoves(int, int, int);
 
 int places[8][8] = {};
-int moves[100][5] = {}; //new x, new y, x, y, peice
+int moves[100][5] = {}; // x, y, new x, new y, peice
+int counter = 0;
 
 
 int main (){
@@ -59,25 +60,37 @@ int createMoves (int piece, int x, int y){
     return 0;
 }
 
+void sign (int num){
+    int sign = num/abs(num);
+    return sign;
+}
+
 
 
 void rook(int x, int y){
     for ()
 }
 
-void knight(int x, int y, bool pos){
+void knight(int x, int y){
 
 }
 
-void queen(int x, int y, bool pos){
+void queen(int x, int y){
 
 }
 
-void pawn(int x, int y, bool pos){
-
+void pawn(int x, int y){
+    if (places[x][y+sign(places[x][y])]==0){
+        moves[counter][0]= x;
+        moves[counter][1]= y;
+        moves[counter][3]= x;
+        moves[counter][4]= y+sign(places[x][y]);
+        moves[counter][5]= sign(places[x][y]);
+    }
+    counter++;
 }
 
-void king(int x, int y, bool pos){
+void king(int x, int y){
 
 }
 
