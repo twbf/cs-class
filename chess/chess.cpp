@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
-#include <time.h>
-#include <string>
+//#include <time.h>
+//#include <string>
 
 using namespace std;
 
@@ -32,9 +32,12 @@ int sign (int num){
     return sign;
 }
 
-//void asignMove (int move[5]){
-
-//}
+void asignMove (int move[5]){
+    for(int i=0; i<5; i++){
+        moves[counter][i]=move[i];
+    }
+    counter++;
+}
 
 //void rook(int x, int y){
     //for ()
@@ -51,11 +54,8 @@ void queen(int x, int y){
 void pawn(int x, int y){
     if (places[x][y+sign(places[x][y])]==0){
         int move[5] = {x, y, x, y+sign(places[x][y]), sign(places[x][y])};
-        //asignMove(move);
-
-        moves[counter] = move;
+        asignMove(move);
     }
-    counter++;
 }
 
 void king(int x, int y){
@@ -67,12 +67,12 @@ void bishop(int x, int y){
 }
 
  int printBoard(){
-     cout << endl;
+    cout << endl;
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){
-             cout << places[i][j] << " ";
+            cout << places[i][j] << " ";
          }
-         cout << endl;
+        cout << endl;
      }
      return 0;
  }
@@ -80,30 +80,38 @@ void bishop(int x, int y){
 
  void next(){
      for (int i = 0; i<8; i++){
+         cout << "j " << endl;
          for (int j = 0; j<8; j++){
              switch (places[i][j]){
                  case 0 :
-                     //exit
+                     break;
                  case 1 :
                      pawn(i,j);
+                     break;
                  case 2:
                      //rook(i,j);
+                     break;
                  case 3:
                      knight(i,j);
+                     break;
                  case 4:
                      bishop(i,j);
+                     break;
                  case 5:
                      king(i,j);
+                     break;
                  case 6:
                      queen(i,j);
+                     break;
+                 default:
+                    break;
              }
          }
      }
  }
 
  int main (){
-     ifstream fin ("chess/initial-board.in");
-     srand(time(0));
+     ifstream fin ("initial-board.in");
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){
              fin >> places[i][j];
@@ -111,5 +119,5 @@ void bishop(int x, int y){
      }
      printBoard();
      next();
-     createMoves(-1,0,0);
+     //createMoves(-1,1,0);
  }
