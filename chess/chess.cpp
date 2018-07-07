@@ -80,7 +80,6 @@ void bishop(int x, int y){
 
  void next(){
      for (int i = 0; i<8; i++){
-         cout << "j " << endl;
          for (int j = 0; j<8; j++){
              switch (places[i][j]){
                  case 0 :
