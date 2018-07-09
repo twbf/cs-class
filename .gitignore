@@ -5,3 +5,5 @@
 /AnagramGame/nbproject/private/
 /AnagramGame/build/
 /GUIFormExamples/build/
+
+*.out

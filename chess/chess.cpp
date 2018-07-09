@@ -131,7 +131,7 @@ void rook(int x, int y){
                  default:
                     break;
              }
-             std::cout << "l" << '\n';
+             std::cout << "b" << '\n';
          }
      }
  }
