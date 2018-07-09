@@ -39,10 +39,6 @@ void asignMove (int move[5]){
     counter++;
 }
 
-//void rook(int x, int y){
-    //for ()
-//}
-
 void knight(int x, int y){
 
 }
@@ -73,15 +69,33 @@ void king(int x, int y){
 
 }
 
+
 void bishop(int x, int y){
 
 }
 
 void rook(int x, int y){
-
+    int eachDirection[4];
+    for (int i=0; i<4; i++){
+        eachDirection[i] = rookRecur(x,y,i);
+    }
 }
 
- int printBoard(){
+int rookRecur(int x, int y, int direction) {
+    if (places[newX][newY]==0){
+        return 1 + rookRecur(newX, newY, direction);
+    } else{
+        return 0;
+    }
+}
+
+int whichDirection(int direction){
+    if (direction<3){
+
+    }
+}
+
+int printBoard(){
     cout << endl;
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){
@@ -114,7 +128,7 @@ void rook(int x, int y){
                      pawn(i,j);
                      break;
                  case 2:
-                     //rook(i,j);
+                     rook(i,j);
                      break;
                  case 3:
                      knight(i,j);
@@ -131,7 +145,7 @@ void rook(int x, int y){
                  default:
                     break;
              }
-             std::cout << "b" << '\n';
+             std::cout << "l" << '\n';
          }
      }
  }
