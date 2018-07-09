@@ -11,7 +11,7 @@ int printBoard();
 int createMoves(int, int, int);
 
 int places[8][8] = {};
-int moves[100][5] = {}; // x, y, new x, new y, peice
+int moves[100][5] = {}; // x, y, new x, new y, piece
 int counter = 0;
 
 
@@ -52,8 +52,19 @@ void queen(int x, int y){
 }
 
 void pawn(int x, int y){
-    if (places[x][y+sign(places[x][y])]==0){
-        int move[5] = {x, y, x, y+sign(places[x][y]), sign(places[x][y])};
+
+    int newY = y+sign(places[x][y]);
+
+    if (places[x][newY]==0){
+        int move[5] = {x, y, x, newY, sign(places[x][y])};
+        asignMove(move);
+    }
+    if (places[x+1][newY]==1){
+        int move[5] = {x, y, x+1, newY, sign(places[x][y])};
+        asignMove(move);
+    }
+    if (places[x-1][newY]==1){
+        int move[5] = {x, y, x-1, newY, sign(places[x][y])};
         asignMove(move);
     }
 }
@@ -66,6 +77,10 @@ void bishop(int x, int y){
 
 }
 
+void rook(int x, int y){
+
+}
+
  int printBoard(){
     cout << endl;
      for (int i = 0; i<8; i++){
@@ -75,6 +90,17 @@ void bishop(int x, int y){
         cout << endl;
      }
      return 0;
+ }
+
+ int printMoves(){
+     cout << endl;
+      for (int i = 0; i<100; i++){
+          for (int j = 0; j<5; j++){
+             cout << moves[i][j] << " ";
+          }
+         cout << endl;
+      }
+      return 0;
  }
 
 
@@ -105,6 +131,7 @@ void bishop(int x, int y){
                  default:
                     break;
              }
+             std::cout << "l" << '\n';
          }
      }
  }
@@ -118,5 +145,6 @@ void bishop(int x, int y){
      }
      printBoard();
      next();
+     printMoves();
      //createMoves(-1,1,0);
  }
