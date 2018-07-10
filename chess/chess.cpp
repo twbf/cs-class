@@ -74,14 +74,25 @@ void bishop(int x, int y){
 
 }
 
+int rookNewX = 0;
+int rookNewY = 0;
+
 void rook(int x, int y){
     int eachDirection[4];
     for (int i=0; i<4; i++){
+        rookNewX = 0;
+        rookNewY = 0;
         eachDirection[i] = rookRecur(x,y,i);
     }
 }
 
+void resetDirection(){
+    rookNewX = 0;
+    rookNewY = 0;
+}
+
 int rookRecur(int x, int y, int direction) {
+    int newX = rookNewX
     if (places[newX][newY]==0){
         return 1 + rookRecur(newX, newY, direction);
     } else{
@@ -89,9 +100,20 @@ int rookRecur(int x, int y, int direction) {
     }
 }
 
-int whichDirection(int direction){
-    if (direction<3){
+// directions are cardinal with y = 1 being north
 
+int whichDirection(int direction){
+    if (direction==0){
+        rookNewY=1;
+    }
+    if (direction==1){
+        rookNewX=1;
+    }
+    if (direction==2){
+        rookNewY=-1;
+    }
+    if (direction==3){
+        rookNewX=-1;
     }
 }
 
