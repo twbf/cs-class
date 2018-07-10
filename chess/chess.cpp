@@ -10,22 +10,11 @@ void zeroPlaces();
 int printBoard();
 int createMoves(int, int, int);
 
-int places[8][8] = {};
+int places[8][8];
 int moves[100][5] = {}; // x, y, new x, new y, piece
 int counter = 0;
-
-
-
-
-int createMoves (int piece, int x, int y){
-    int kindOfPeice = abs(piece);
-    int side = 0;
-    if (piece!=kindOfPeice){
-        side=1;
-    }
-    //put into peice functons
-    return 0;
-}
+int dirNewX = 0; //For directions
+int dirNewY = 0;
 
 int sign (int num){
     int sign = num/abs(num);
@@ -39,6 +28,11 @@ void asignMove (int move[5]){
     counter++;
 }
 
+void resetDir(){
+    dirNewX = 0;
+    dirNewY = 0;
+}
+
 void knight(int x, int y){
 
 }
@@ -49,18 +43,18 @@ void queen(int x, int y){
 
 void pawn(int x, int y){
 
-    int newY = y+sign(places[x][y]);
-
-    if (places[x][newY]==0){
-        int move[5] = {x, y, x, newY, sign(places[x][y])};
+    int newY = y+sign(places[y][x]);
+    std::cout << "gjdh" << '\n';
+    if (places[newY][x]==0){
+        int move[5] = {x, y, x, newY, sign(places[y][x])};
         asignMove(move);
     }
-    if (places[x+1][newY]==1){
-        int move[5] = {x, y, x+1, newY, sign(places[x][y])};
+    if (places[newY][x+1]!=0){
+        int move[5] = {x, y, x+1, newY, sign(places[y][x])};
         asignMove(move);
     }
-    if (places[x-1][newY]==1){
-        int move[5] = {x, y, x-1, newY, sign(places[x][y])};
+    if (places[newY][x-1]!=0){
+        int move[5] = {x, y, x-1, newY, sign(places[y][x])};
         asignMove(move);
     }
 }
@@ -74,46 +68,38 @@ void bishop(int x, int y){
 
 }
 
-int rookNewX = 0;
-int rookNewY = 0;
-
-void rook(int x, int y){
-    int eachDirection[4];
-    for (int i=0; i<4; i++){
-        rookNewX = 0;
-        rookNewY = 0;
-        eachDirection[i] = rookRecur(x,y,i);
+// directions are cardinal with y = 1 being north
+void rookDirection(int direction){
+    resetDir();
+    if (direction==0){
+        dirNewY=-1;
+    }
+    if (direction==1){
+        dirNewX=1;
+    }
+    if (direction==2){
+        dirNewY=1;
+    }
+    if (direction==3){
+        dirNewX=-1;
     }
 }
 
-void resetDirection(){
-    rookNewX = 0;
-    rookNewY = 0;
-}
-
 int rookRecur(int x, int y, int direction) {
-    int newX = rookNewX
-    if (places[newX][newY]==0){
+    rookDirection(direction);
+    int newX = dirNewX + x;
+    int newY = dirNewY + y;
+    if (places[newY][newX]==0&&newX>=0&&newY>=0&&newX<8&&newY<8){
         return 1 + rookRecur(newX, newY, direction);
     } else{
         return 0;
     }
 }
 
-// directions are cardinal with y = 1 being north
-
-int whichDirection(int direction){
-    if (direction==0){
-        rookNewY=1;
-    }
-    if (direction==1){
-        rookNewX=1;
-    }
-    if (direction==2){
-        rookNewY=-1;
-    }
-    if (direction==3){
-        rookNewX=-1;
+void rook(int x, int y){
+    int eachDirection[4];
+    for (int i=0; i<4; i++){
+        eachDirection[i] = rookRecur(x,y,i);
     }
 }
 
@@ -143,31 +129,30 @@ int printBoard(){
  void next(){
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){
-             switch (places[i][j]){
+             switch (abs(places[i][j])){
                  case 0 :
                      break;
                  case 1 :
-                     pawn(i,j);
+                     pawn(j,i);
                      break;
                  case 2:
-                     rook(i,j);
+                     rook(j,i);
                      break;
                  case 3:
-                     knight(i,j);
+                     knight(j,i);
                      break;
                  case 4:
-                     bishop(i,j);
+                     bishop(j,i);
                      break;
                  case 5:
-                     king(i,j);
+                     king(j,i);
                      break;
                  case 6:
-                     queen(i,j);
+                     queen(j,i);
                      break;
                  default:
                     break;
              }
-             std::cout << "l" << '\n';
          }
      }
  }
