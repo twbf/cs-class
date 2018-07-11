@@ -1,8 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
-//#include <time.h>
-//#include <string>
+#include "game.h"
 
 using namespace std;
 
@@ -132,21 +131,11 @@ void bishop(int x, int y){
 void queen(int x, int y){
     for (int i=0; i<4; i++){
         recur(x,y,x,y,1,i);
-    }
-    for (int i=0; i<4; i++){
         recur(x,y,x,y,2,i);
     }
 }
 
-void knight(int x, int y){
-    int pMoves[8][2] =  {{1,2},
-                            {2,1},
-                            {2,-1},
-                            {1,-2},
-                            {-1,-2},
-                            {-2,-1},
-                            {-2,1},
-                            {-1,2}};
+void oneStep(int x, int y, int pMoves[8][2]){
     for (int i=0; i<8; i++){
         int nX = pMoves[i][0] + x;
         int nY = pMoves[i][1] + y;
@@ -159,18 +148,14 @@ void knight(int x, int y){
     }
 }
 
+void knight(int x, int y){
+    int pMoves[8][2] =  {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
+    oneStep(x,y,pMoves);
+}
+
 void king(int x, int y){
     int pMoves[8][2] =  {{0,1},{0,-1},{1,0},{-1,0},{1,1},{1,-1},{-1,-1},{-1,1}};
-    for (int i=0; i<8; i++){
-        int nX = pMoves[i][0] + x;
-        int nY = pMoves[i][1] + y;
-        if (coB(nX,nY)){
-            if (places[nY][nX]==0||sign(places[nY][nX])!=sign(places[y][x])){
-                int move[5] = {x, y, nX, nY, places[y][x]};
-                asignMove(move);
-            }
-        }
-    }
+    oneStep(x,y,pMoves);
 }
 
 int printBoard(){
@@ -196,6 +181,12 @@ int printBoard(){
  }
 
  void next(){
+     ifstream fin ("initial-board.in");
+     for (int i = 0; i<8; i++){
+         for (int j = 0; j<8; j++){
+             fin >> places[i][j];
+         }
+     }
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){
              switch (abs(places[i][j])){
@@ -224,16 +215,4 @@ int printBoard(){
              }
          }
      }
- }
-
- int main (){
-     ifstream fin ("initial-board.in");
-     for (int i = 0; i<8; i++){
-         for (int j = 0; j<8; j++){
-             fin >> places[i][j];
-         }
-     }
-     printBoard();
-     next();
-     printMoves();
  }
