@@ -41,18 +41,8 @@ void resetDir(){
     dirNewY = 0;
 }
 
-void knight(int x, int y){
-
-}
-
-void queen(int x, int y){
-
-}
-
 void pawn(int x, int y){
-
     int newY = y+sign(places[y][x]);
-    std::cout << "gjdh" << '\n';
     if (places[newY][x]==0&&coB(x,newY)){
         int move[5] = {x, y, x, newY, sign(places[y][x])};
         asignMove(move);
@@ -67,17 +57,8 @@ void pawn(int x, int y){
     }
 }
 
-void king(int x, int y){
-
-}
-
-
-void bishop(int x, int y){
-
-}
-
 // directions are cardinal with y = 1 being north
-void rookDirection(int direction){
+void ortagonalDir(int direction){
     resetDir();
     if (direction==0){
         dirNewY=-1;
@@ -93,24 +74,76 @@ void rookDirection(int direction){
     }
 }
 
-int rookRecur(int x, int y, int orgX, int orgY, int direction) {
-    rookDirection(direction);
+// starting with north-east
+void diagonalDir(int direction){
+    resetDir();
+    if (direction==0){
+        dirNewY=-1;
+        dirNewX=1;
+    }
+    if (direction==1){
+        dirNewX=1;
+        dirNewY=1;
+    }
+    if (direction==2){
+        dirNewY=1;
+        dirNewX=-1;
+    }
+    if (direction==3){
+        dirNewX=-1;
+        dirNewY=-1;
+    }
+}
+
+
+void recur(int x, int y, int orgX, int orgY, int grid, int direction) { // For grid 1 is ortagonal and 2 is diagonal
+    if (grid == 1) {
+        ortagonalDir(direction);
+    }
+    if (grid == 2) {
+        diagonalDir(direction);
+    }
     int newX = dirNewX + x;
     int newY = dirNewY + y;
-    if (places[newY][newX]==0&&coB(newX,newY)){
-        int move[5] = {orgX, orgY, newX, newY, places[orgY][orgX]};
-        asignMove(move);
-        return 1 + rookRecur(newX, newY, orgX, orgY, direction);
-    } else{
-        return 0;
+    if (coB(newX,newY)){
+        if (places[newY][newX]==0){
+            int move[5] = {orgX, orgY, newX, newY, places[orgY][orgX]};
+            asignMove(move);
+            recur(newX, newY, orgX, orgY, grid, direction);
+        } else if(sign(places[newY][newX])!=sign(places[orgY][orgX])){
+            int move[5] = {orgX, orgY, newX, newY, places[orgY][orgX]};
+            asignMove(move);
+        }
     }
 }
 
 void rook(int x, int y){
-    int eachDirection[4];
     for (int i=0; i<4; i++){
-        eachDirection[i] = rookRecur(x,y,x,y,i);
+        recur(x,y,x,y,1,i);
     }
+}
+
+void bishop(int x, int y){
+    for (int i=0; i<4; i++){
+        recur(x,y,x,y,2,i);
+    }
+}
+
+void queen(int x, int y){
+    for (int i=0; i<4; i++){
+        recur(x,y,x,y,1,i);
+    }
+    for (int i=0; i<4; i++){
+        recur(x,y,x,y,2,i);
+    }
+}
+
+void knight(int x, int y){
+
+}
+
+void king(int x, int y){
+
 }
 
 int printBoard(){
@@ -135,7 +168,6 @@ int printBoard(){
       return 0;
  }
 
-
  void next(){
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){
@@ -154,10 +186,10 @@ int printBoard(){
                  case 4:
                      bishop(j,i);
                      break;
-                 case 5:
+                 case 6:
                      king(j,i);
                      break;
-                 case 6:
+                 case 5:
                      queen(j,i);
                      break;
                  default:
@@ -177,5 +209,4 @@ int printBoard(){
      printBoard();
      next();
      printMoves();
-     //createMoves(-1,1,0);
  }
