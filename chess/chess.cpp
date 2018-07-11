@@ -13,8 +13,8 @@ int createMoves(int, int, int);
 int places[8][8];
 int moves[100][5] = {}; // x, y, new x, new y, piece
 int counter = 0;
-int dirNewX = 0; //For directions
-int dirNewY = 0;
+int dirnX = 0; //For directions
+int dirnY = 0;
 
 int sign (int num){
     int sign = num/abs(num);
@@ -37,22 +37,22 @@ void asignMove (int move[5]){
 }
 
 void resetDir(){
-    dirNewX = 0;
-    dirNewY = 0;
+    dirnX = 0;
+    dirnY = 0;
 }
 
 void pawn(int x, int y){
-    int newY = y+sign(places[y][x]);
-    if (places[newY][x]==0&&coB(x,newY)){
-        int move[5] = {x, y, x, newY, sign(places[y][x])};
+    int nY = y+sign(places[y][x]);
+    if (places[nY][x]==0&&coB(x,nY)){
+        int move[5] = {x, y, x, nY, sign(places[y][x])};
         asignMove(move);
     }
-    if (places[newY][x+1]!=0&&coB(x+1,newY)){
-        int move[5] = {x, y, x+1, newY, sign(places[y][x])};
+    if (places[nY][x+1]!=0&&coB(x+1,nY)){
+        int move[5] = {x, y, x+1, nY, sign(places[y][x])};
         asignMove(move);
     }
-    if (places[newY][x-1]!=0&&coB(x-1,newY)){
-        int move[5] = {x, y, x-1, newY, sign(places[y][x])};
+    if (places[nY][x-1]!=0&&coB(x-1,nY)){
+        int move[5] = {x, y, x-1, nY, sign(places[y][x])};
         asignMove(move);
     }
 }
@@ -61,16 +61,16 @@ void pawn(int x, int y){
 void ortagonalDir(int direction){
     resetDir();
     if (direction==0){
-        dirNewY=-1;
+        dirnY=-1;
     }
     if (direction==1){
-        dirNewX=1;
+        dirnX=1;
     }
     if (direction==2){
-        dirNewY=1;
+        dirnY=1;
     }
     if (direction==3){
-        dirNewX=-1;
+        dirnX=-1;
     }
 }
 
@@ -78,20 +78,20 @@ void ortagonalDir(int direction){
 void diagonalDir(int direction){
     resetDir();
     if (direction==0){
-        dirNewY=-1;
-        dirNewX=1;
+        dirnY=-1;
+        dirnX=1;
     }
     if (direction==1){
-        dirNewX=1;
-        dirNewY=1;
+        dirnX=1;
+        dirnY=1;
     }
     if (direction==2){
-        dirNewY=1;
-        dirNewX=-1;
+        dirnY=1;
+        dirnX=-1;
     }
     if (direction==3){
-        dirNewX=-1;
-        dirNewY=-1;
+        dirnX=-1;
+        dirnY=-1;
     }
 }
 
@@ -103,15 +103,15 @@ void recur(int x, int y, int orgX, int orgY, int grid, int direction) { // For g
     if (grid == 2) {
         diagonalDir(direction);
     }
-    int newX = dirNewX + x;
-    int newY = dirNewY + y;
-    if (coB(newX,newY)){
-        if (places[newY][newX]==0){
-            int move[5] = {orgX, orgY, newX, newY, places[orgY][orgX]};
+    int nX = dirnX + x;
+    int nY = dirnY + y;
+    if (coB(nX,nY)){
+        if (places[nY][nX]==0){
+            int move[5] = {orgX, orgY, nX, nY, places[orgY][orgX]};
             asignMove(move);
-            recur(newX, newY, orgX, orgY, grid, direction);
-        } else if(sign(places[newY][newX])!=sign(places[orgY][orgX])){
-            int move[5] = {orgX, orgY, newX, newY, places[orgY][orgX]};
+            recur(nX, nY, orgX, orgY, grid, direction);
+        } else if(sign(places[nY][nX])!=sign(places[orgY][orgX])){
+            int move[5] = {orgX, orgY, nX, nY, places[orgY][orgX]};
             asignMove(move);
         }
     }
@@ -139,11 +139,38 @@ void queen(int x, int y){
 }
 
 void knight(int x, int y){
-
+    int pMoves[8][2] =  {{1,2},
+                            {2,1},
+                            {2,-1},
+                            {1,-2},
+                            {-1,-2},
+                            {-2,-1},
+                            {-2,1},
+                            {-1,2}};
+    for (int i=0; i<8; i++){
+        int nX = pMoves[i][0] + x;
+        int nY = pMoves[i][1] + y;
+        if (coB(nX,nY)){
+            if (places[nY][nX]==0||sign(places[nY][nX])!=sign(places[y][x])){
+                int move[5] = {x, y, nX, nY, places[y][x]};
+                asignMove(move);
+            }
+        }
+    }
 }
 
 void king(int x, int y){
-
+    int pMoves[8][2] =  {{0,1},{0,-1},{1,0},{-1,0},{1,1},{1,-1},{-1,-1},{-1,1}};
+    for (int i=0; i<8; i++){
+        int nX = pMoves[i][0] + x;
+        int nY = pMoves[i][1] + y;
+        if (coB(nX,nY)){
+            if (places[nY][nX]==0||sign(places[nY][nX])!=sign(places[y][x])){
+                int move[5] = {x, y, nX, nY, places[y][x]};
+                asignMove(move);
+            }
+        }
+    }
 }
 
 int printBoard(){
