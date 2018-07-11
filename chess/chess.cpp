@@ -21,6 +21,14 @@ int sign (int num){
     return sign;
 }
 
+// Checks to see if a spot is on the board.
+bool coB(int x, int y){
+    if(x>=0&&y>=0&&x<8&&y<8){
+        return true;
+    }
+    return false;
+}
+
 void asignMove (int move[5]){
     for(int i=0; i<5; i++){
         moves[counter][i]=move[i];
@@ -45,15 +53,15 @@ void pawn(int x, int y){
 
     int newY = y+sign(places[y][x]);
     std::cout << "gjdh" << '\n';
-    if (places[newY][x]==0){
+    if (places[newY][x]==0&&coB(x,newY)){
         int move[5] = {x, y, x, newY, sign(places[y][x])};
         asignMove(move);
     }
-    if (places[newY][x+1]!=0){
+    if (places[newY][x+1]!=0&&coB(x+1,newY)){
         int move[5] = {x, y, x+1, newY, sign(places[y][x])};
         asignMove(move);
     }
-    if (places[newY][x-1]!=0){
+    if (places[newY][x-1]!=0&&coB(x-1,newY)){
         int move[5] = {x, y, x-1, newY, sign(places[y][x])};
         asignMove(move);
     }
@@ -85,12 +93,14 @@ void rookDirection(int direction){
     }
 }
 
-int rookRecur(int x, int y, int direction) {
+int rookRecur(int x, int y, int orgX, int orgY, int direction) {
     rookDirection(direction);
     int newX = dirNewX + x;
     int newY = dirNewY + y;
-    if (places[newY][newX]==0&&newX>=0&&newY>=0&&newX<8&&newY<8){
-        return 1 + rookRecur(newX, newY, direction);
+    if (places[newY][newX]==0&&coB(newX,newY)){
+        int move[5] = {orgX, orgY, newX, newY, places[orgY][orgX]};
+        asignMove(move);
+        return 1 + rookRecur(newX, newY, orgX, orgY, direction);
     } else{
         return 0;
     }
@@ -99,7 +109,7 @@ int rookRecur(int x, int y, int direction) {
 void rook(int x, int y){
     int eachDirection[4];
     for (int i=0; i<4; i++){
-        eachDirection[i] = rookRecur(x,y,i);
+        eachDirection[i] = rookRecur(x,y,x,y,i);
     }
 }
 
