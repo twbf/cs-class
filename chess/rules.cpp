@@ -35,17 +35,24 @@ void resetDir(){
 
 void rules::pawn(int x, int y){
     int nY = y+sign(places[y][x]);
+    int ori = places[y][x];
+    int a = places[nY][x+1];
+    int b = places[nY][x-1];
     if (places[nY][x]==0&&coB(x,nY)){
-        int move[5] = {x, y, x, nY, sign(places[y][x])};
+        int move[5] = {x, y, x, nY, sign(ori)};
         asignMove(move);
     }
-    if (places[nY][x+1]!=0&&coB(x+1,nY)){
-        int move[5] = {x, y, x+1, nY, sign(places[y][x])};
-        asignMove(move);
+    if (a!=0&&coB(x+1,nY)){
+        if (sign(ori)!=sign(a)){
+            int move[5] = {x, y, x+1, nY, sign(ori)};
+            asignMove(move);
+        }
     }
-    if (places[nY][x-1]!=0&&coB(x-1,nY)){
-        int move[5] = {x, y, x-1, nY, sign(places[y][x])};
-        asignMove(move);
+    if (b!=0&&coB(x-1,nY)){
+        if (sign(ori)!=sign(b)){
+            int move[5] = {x, y, x-1, nY, sign(ori)};
+            asignMove(move);
+        }
     }
 }
 
@@ -172,15 +179,17 @@ int rules::printBoard(){
       }
  }
 
- void rules::next(){
+ void rules::next(bool first){  //if first is true then it cins from file
      memset(moves, 0, sizeof(moves));
      counter = 0;
-     ifstream fin ("initial-board.in");
-     for (int i = 0; i<8; i++){
-         for (int j = 0; j<8; j++){
-             fin >> places[i][j];
+     if (first){
+         ifstream fin ("initial-board.in");
+         for (int i = 0; i<8; i++){
+             for (int j = 0; j<8; j++){
+                 fin >> places[i][j];
+             }
          }
-     }
+    }
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){
              switch (abs(places[i][j])){

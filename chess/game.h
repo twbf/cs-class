@@ -3,16 +3,22 @@
 
 class rules{
 public:
+
+    //rules.cpp
     int moves[100][5]; // x, y, new x, new y, piece
     int places[8][8];
-    void next();
+    void next(bool);
     int printBoard();
     void printMoves();
     int counter;
     void asignMove(int[5]);
+
+    //play.cpp
     void play();
 
 private:
+
+    //rules.cpp
     void pawn(int, int);
     void oneStep(int, int, int[8][2]);
     void recur(int, int, int, int, int, int);
@@ -23,6 +29,9 @@ private:
     void rook(int, int);
     void bishop(int, int);
     void queen(int, int);
+
+    //play.cpp
+    bool movePiece(int);
 };
 void play();
 
