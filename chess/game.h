@@ -5,7 +5,7 @@ class rules{
 public:
 
     //rules.cpp
-    int moves[100][5]; // x, y, new x, new y, piece
+    int moves[1000][5]; // x, y, new x, new y, piece
     int places[8][8];
     void next(bool);
     int printBoard();

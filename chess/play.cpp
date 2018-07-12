@@ -41,6 +41,4 @@ void rules::play(){
     if (count%2==0){
         black ++;
     }
-    //printBoard();
-    cout << count << endl;
 }

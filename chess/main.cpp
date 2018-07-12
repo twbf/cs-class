@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
+#include <ctime>
 #include "game.h"
 
 using namespace std;
@@ -8,7 +9,8 @@ using namespace std;
 int main (){
      rules o;
      o.black = 0;
-     for(int i=0; i<1000; i++){
+     srand(time(0));
+     for(int i=0; i<50000; i++){
          o.next(true);
          o.play();
      }
