@@ -5,15 +5,14 @@
 
 using namespace std;
 
-void zeroPlaces();
-int printBoard();
-int createMoves(int, int, int);
+//int printBoard();
 
 int places[8][8];
-int moves[100][5] = {}; // x, y, new x, new y, piece
-int counter = 0;
+//int rules::moves[100][5] = {}; // x, y, new x, new y, piece
 int dirnX = 0; //For directions
 int dirnY = 0;
+
+rules o;
 
 int sign (int num){
     int sign = num/abs(num);
@@ -28,9 +27,12 @@ bool coB(int x, int y){
     return false;
 }
 
-void asignMove (int move[5]){
+void rules::asignMove (int move[5]){
+    std::cout << '\n' << counter;
+    //rules o;
     for(int i=0; i<5; i++){
         moves[counter][i]=move[i];
+        std::cout << moves[counter][i];
     }
     counter++;
 }
@@ -44,15 +46,15 @@ void pawn(int x, int y){
     int nY = y+sign(places[y][x]);
     if (places[nY][x]==0&&coB(x,nY)){
         int move[5] = {x, y, x, nY, sign(places[y][x])};
-        asignMove(move);
+        o.asignMove(move);
     }
     if (places[nY][x+1]!=0&&coB(x+1,nY)){
         int move[5] = {x, y, x+1, nY, sign(places[y][x])};
-        asignMove(move);
+        o.asignMove(move);
     }
     if (places[nY][x-1]!=0&&coB(x-1,nY)){
         int move[5] = {x, y, x-1, nY, sign(places[y][x])};
-        asignMove(move);
+        o.asignMove(move);
     }
 }
 
@@ -107,11 +109,11 @@ void recur(int x, int y, int orgX, int orgY, int grid, int direction) { // For g
     if (coB(nX,nY)){
         if (places[nY][nX]==0){
             int move[5] = {orgX, orgY, nX, nY, places[orgY][orgX]};
-            asignMove(move);
+            o.asignMove(move);
             recur(nX, nY, orgX, orgY, grid, direction);
         } else if(sign(places[nY][nX])!=sign(places[orgY][orgX])){
             int move[5] = {orgX, orgY, nX, nY, places[orgY][orgX]};
-            asignMove(move);
+            o.asignMove(move);
         }
     }
 }
@@ -142,7 +144,7 @@ void oneStep(int x, int y, int pMoves[8][2]){
         if (coB(nX,nY)){
             if (places[nY][nX]==0||sign(places[nY][nX])!=sign(places[y][x])){
                 int move[5] = {x, y, nX, nY, places[y][x]};
-                asignMove(move);
+                o.asignMove(move);
             }
         }
     }
@@ -158,7 +160,7 @@ void king(int x, int y){
     oneStep(x,y,pMoves);
 }
 
-int printBoard(){
+int rules::printBoard(){
     cout << endl;
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){
@@ -169,18 +171,17 @@ int printBoard(){
      return 0;
  }
 
- int printMoves(){
+ void rules::printMoves(){
      cout << endl;
       for (int i = 0; i<100; i++){
           for (int j = 0; j<5; j++){
-             cout << moves[i][j] << " ";
+             std::cout << moves[i][j] << " ";
           }
          cout << endl;
       }
-      return 0;
  }
 
- void next(){
+ void rules::next(){
      ifstream fin ("initial-board.in");
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){

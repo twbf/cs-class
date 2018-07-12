@@ -3,9 +3,13 @@
 #include <fstream>
 #include "game.h"
 
+using namespace std;
 
 int main (){
-     next();
-     printBoard();
-     printMoves();
+     rules o;
+     //o.counter = 0;
+     o.next();
+     //play();
+    // o.printBoard();
+     //o.printMoves();
  }
