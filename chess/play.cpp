@@ -8,7 +8,7 @@ using namespace std;
 
 bool rules::movePiece(int i) {
     if (abs(places[moves[i][3]][moves[i][2]])==6){
-        std::cout << "Checkmate!!" << '\n';
+        //std::cout << "Checkmate!!" << '\n';
         return false;
     }
     int spot = places[moves[i][1]][moves[i][0]];
@@ -38,6 +38,9 @@ void rules::play(){
             end = movePiece(j);
         }
     }
-    printBoard();
+    if (count%2==0){
+        black ++;
+    }
+    //printBoard();
     cout << count << endl;
 }

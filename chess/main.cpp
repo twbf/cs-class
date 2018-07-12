@@ -7,8 +7,10 @@ using namespace std;
 
 int main (){
      rules o;
-     for(int i=0; i<10; i++){
+     o.black = 0;
+     for(int i=0; i<1000; i++){
          o.next(true);
          o.play();
      }
+     cout << o.black << endl;
  }

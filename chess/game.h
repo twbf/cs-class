@@ -11,6 +11,7 @@ public:
     int printBoard();
     void printMoves();
     int counter;
+    int black;
     void asignMove(int[5]);
 
     //play.cpp
