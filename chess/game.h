@@ -16,6 +16,7 @@ public:
 
     //play.cpp
     void play();
+    int count;
 
 private:
 
@@ -33,6 +34,9 @@ private:
 
     //play.cpp
     bool movePiece(int);
+    bool pickRandomMove(bool);
+    bool highestValue(bool);
+    bool getSide(bool, int);
 };
 void play();
 

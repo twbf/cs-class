@@ -172,7 +172,7 @@ int rules::printBoard(){
 
  void rules::printMoves(){
      cout << endl;
-      for (int i = 0; i<100; i++){
+      for (int i = 0; i<counter; i++){
           for (int j = 0; j<5; j++){
              std::cout << moves[i][j] << " ";
           }

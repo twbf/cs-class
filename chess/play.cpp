@@ -19,26 +19,53 @@ bool rules::movePiece(int i) {
 
 void rules::play(){
     bool end = true;
-    int count = 0;
+    count = 0;
     while (end){
-        count++;
-        next(false);
-        int j = rand()%100;
-        while (moves[j][4]<0 || moves[j][4]==0){
-            j = rand()%100;
-        }
-        end = movePiece(j);
+
+        //black
+        end = pickRandomMove(true);
+        //printBoard();
         if (end){
-            count++;
-            next(false);
-            j = rand()%100;
-            while (moves[j][4]>0 || moves[j][4]==0){
-                j = rand()%100;
-            }
-            end = movePiece(j);
+
+            //white
+            end = highestValue(true);
+            //printBoard();
         }
     }
+    //printMoves();
     if (count%2==0){
         black ++;
     }
+}
+
+bool rules::getSide(bool side, int j){
+    if (side){
+        return moves[j][4]<0;
+    } else {
+        return moves[j][4]>0;
+    }
+}
+
+bool rules::pickRandomMove(bool side){
+    count++;
+    next(false);
+    int j = rand()%counter;
+    while (!getSide(side,j) || moves[j][4]==0){
+        j = rand()%counter;
+    }
+    return movePiece(j);
+}
+
+bool rules::highestValue(bool side){
+    count++;
+    next(false);
+    int max = 0, index = 0, spot = 0;
+    for (int i=0; i<counter; i++){
+        spot = places[moves[i][3]][moves[i][2]];
+        if (!getSide(side,i)&&abs(spot)>max){
+            index = i;
+            max = spot;
+        }
+    }
+    return movePiece(index);
 }

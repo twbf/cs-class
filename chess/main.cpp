@@ -10,7 +10,7 @@ int main (){
      rules o;
      o.black = 0;
      srand(time(0));
-     for(int i=0; i<50000; i++){
+     for(int i=0; i<100; i++){
          o.next(true);
          o.play();
      }
