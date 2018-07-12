@@ -23,16 +23,17 @@ void rules::play(){
     while (end){
 
         //black
-        end = pickRandomMove(true);
+        end = highestValue(false);
         //printBoard();
         if (end){
 
             //white
-            end = highestValue(true);
+            end = pickRandomMove(true);
             //printBoard();
         }
     }
     //printMoves();
+    cout << count << endl;
     if (count%2==0){
         black ++;
     }
@@ -57,15 +58,19 @@ bool rules::pickRandomMove(bool side){
 }
 
 bool rules::highestValue(bool side){
-    count++;
     next(false);
     int max = 0, index = 0, spot = 0;
     for (int i=0; i<counter; i++){
         spot = places[moves[i][3]][moves[i][2]];
-        if (!getSide(side,i)&&abs(spot)>max){
+        if (getSide(side,i)&&abs(spot)>max){
             index = i;
             max = spot;
         }
     }
-    return movePiece(index);
+    if (max == 0){
+         return pickRandomMove(side);
+    } else {
+        count++;
+        return movePiece(index);
+    }
 }
