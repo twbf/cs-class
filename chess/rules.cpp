@@ -5,14 +5,8 @@
 
 using namespace std;
 
-//int printBoard();
-
-int places[8][8];
-//int rules::moves[100][5] = {}; // x, y, new x, new y, piece
 int dirnX = 0; //For directions
 int dirnY = 0;
-
-rules o;
 
 int sign (int num){
     int sign = num/abs(num);
@@ -28,11 +22,8 @@ bool coB(int x, int y){
 }
 
 void rules::asignMove (int move[5]){
-    std::cout << '\n' << counter;
-    //rules o;
     for(int i=0; i<5; i++){
         moves[counter][i]=move[i];
-        std::cout << moves[counter][i];
     }
     counter++;
 }
@@ -42,24 +33,24 @@ void resetDir(){
     dirnY = 0;
 }
 
-void pawn(int x, int y){
+void rules::pawn(int x, int y){
     int nY = y+sign(places[y][x]);
     if (places[nY][x]==0&&coB(x,nY)){
         int move[5] = {x, y, x, nY, sign(places[y][x])};
-        o.asignMove(move);
+        asignMove(move);
     }
     if (places[nY][x+1]!=0&&coB(x+1,nY)){
         int move[5] = {x, y, x+1, nY, sign(places[y][x])};
-        o.asignMove(move);
+        asignMove(move);
     }
     if (places[nY][x-1]!=0&&coB(x-1,nY)){
         int move[5] = {x, y, x-1, nY, sign(places[y][x])};
-        o.asignMove(move);
+        asignMove(move);
     }
 }
 
 // directions are cardinal with y = 1 being north
-void ortagonalDir(int direction){
+void rules::ortagonalDir(int direction){
     resetDir();
     if (direction==0){
         dirnY=-1;
@@ -76,7 +67,7 @@ void ortagonalDir(int direction){
 }
 
 // starting with north-east
-void diagonalDir(int direction){
+void rules::diagonalDir(int direction){
     resetDir();
     if (direction==0){
         dirnY=-1;
@@ -97,7 +88,7 @@ void diagonalDir(int direction){
 }
 
 
-void recur(int x, int y, int orgX, int orgY, int grid, int direction) { // For grid 1 is ortagonal and 2 is diagonal
+void rules::recur(int x, int y, int orgX, int orgY, int grid, int direction) { // For grid 1 is ortagonal and 2 is diagonal
     if (grid == 1) {
         ortagonalDir(direction);
     }
@@ -109,53 +100,53 @@ void recur(int x, int y, int orgX, int orgY, int grid, int direction) { // For g
     if (coB(nX,nY)){
         if (places[nY][nX]==0){
             int move[5] = {orgX, orgY, nX, nY, places[orgY][orgX]};
-            o.asignMove(move);
+            asignMove(move);
             recur(nX, nY, orgX, orgY, grid, direction);
         } else if(sign(places[nY][nX])!=sign(places[orgY][orgX])){
             int move[5] = {orgX, orgY, nX, nY, places[orgY][orgX]};
-            o.asignMove(move);
+            asignMove(move);
         }
     }
 }
 
-void rook(int x, int y){
+void rules::rook(int x, int y){
     for (int i=0; i<4; i++){
         recur(x,y,x,y,1,i);
     }
 }
 
-void bishop(int x, int y){
+void rules::bishop(int x, int y){
     for (int i=0; i<4; i++){
         recur(x,y,x,y,2,i);
     }
 }
 
-void queen(int x, int y){
+void rules::queen(int x, int y){
     for (int i=0; i<4; i++){
         recur(x,y,x,y,1,i);
         recur(x,y,x,y,2,i);
     }
 }
 
-void oneStep(int x, int y, int pMoves[8][2]){
+void rules::oneStep(int x, int y, int pMoves[8][2]){
     for (int i=0; i<8; i++){
         int nX = pMoves[i][0] + x;
         int nY = pMoves[i][1] + y;
         if (coB(nX,nY)){
             if (places[nY][nX]==0||sign(places[nY][nX])!=sign(places[y][x])){
                 int move[5] = {x, y, nX, nY, places[y][x]};
-                o.asignMove(move);
+                asignMove(move);
             }
         }
     }
 }
 
-void knight(int x, int y){
+void rules::knight(int x, int y){
     int pMoves[8][2] =  {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
     oneStep(x,y,pMoves);
 }
 
-void king(int x, int y){
+void rules::king(int x, int y){
     int pMoves[8][2] =  {{0,1},{0,-1},{1,0},{-1,0},{1,1},{1,-1},{-1,-1},{-1,1}};
     oneStep(x,y,pMoves);
 }
@@ -182,6 +173,8 @@ int rules::printBoard(){
  }
 
  void rules::next(){
+     memset(moves, 0, sizeof(moves));
+     counter = 0;
      ifstream fin ("initial-board.in");
      for (int i = 0; i<8; i++){
          for (int j = 0; j<8; j++){

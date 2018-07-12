@@ -7,9 +7,8 @@ using namespace std;
 
 int main (){
      rules o;
-     //o.counter = 0;
      o.next();
-     //play();
-    // o.printBoard();
-     //o.printMoves();
+     o.play();
+     o.printBoard();
+     o.printMoves();
  }

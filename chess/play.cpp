@@ -5,6 +5,10 @@
 
 using namespace std;
 
-void play(){
+void movePeice() {
+
+}
+
+void rules::play(){
     //moves[100][5] = {};
 }
